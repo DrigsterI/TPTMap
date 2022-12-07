@@ -35,41 +35,74 @@
               <li class="nav-item">
                 <a class="nav-link" href="#">About us</a>
               </li>
+              <li class="nav-item search-nav d-none d-lg-block">
+                <div class="input-group rounded">
+                  <input type="search" class="form-control rounded" placeholder="Search class/group/etc." aria-label="Search" aria-describedby="search-addon" />
+                  <span class="input-group-text border-0" id="search-addon">
+                    <i class="fas fa-search"></i>
+                  </span>
+                </div>
+              </li>
             </ul>
-            <a class="navbar-brand" href="#">Tptmap</a>
+            <a class="navbar-brand d-none d-lg-block" href="#">Tptmap</a>
           </div>
+          <li class="nav-item search-nav d-block d-lg-none">
+            <div class="input-group rounded">
+              <input type="search" class="form-control rounded w-auto" placeholder="Search class/group/etc." aria-label="Search" aria-describedby="search-addon" />
+              <span class="input-group-text border-0" id="search-addon">
+                <i class="fas fa-search"></i>
+              </span>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="navbar-brand d-block d-lg-none align-self-start" href="#">Tptmap</a>
+          </li>
         </div>
       </nav>
-    <!--Tabs for floor change start-->
+    <!--Right tabs-->
     <ul class="nav flex-column align-items-end all-right-tabs">
       <h4 class="right-tabs-title me-2">Floors</h4>
         <li class="nav-item">
-          <a class="nav-link active-right-tab border rounded" id="default_floor" onclick="changeToActiveFloor(this)" href="#">1</a>
+          <a class="nav-link bg-dark text-white active-right-tab border rounded right-tabs" id="default_floor" onclick="changeToActiveFloor(this)" href="#">1</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link border rounded right-tabs" onclick="changeToActiveFloor(this)" href="#">2</a>
+          <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeToActiveFloor(this)" href="#">2</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link border rounded right-tabs" onclick="changeToActiveFloor(this)" href="#">3</a>
+          <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeToActiveFloor(this)" href="#">3</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link border rounded right-tabs" onclick="changeToActiveFloor(this)" href="#">4</a>
+          <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeToActiveFloor(this)" href="#">4</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link border rounded right-tabs" onclick="changeToActiveFloor(this)" href="#">5</a>
+            <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeToActiveFloor(this)" href="#">5</a>
           </li>
-        <h4 class="right-tabs-title me-2 mt-4" >Case</h4>
-        <li class="nav-item">
-          <a class="nav-link active-right-tab active border rounded" aria-current="page" id="default_case" onclick="changeToActiveCase(this)" href="#">A</a>
+        <h4 class="right-tabs-title me-2 mt-4 d-none d-lg-block" >Building</h4>
+        <li class="nav-item d-none d-lg-block">
+          <a class="nav-link bg-dark text-white active-right-tab border rounded" aria-current="page" id="default_case" onclick="changeToActiveCase(this, 'A')" href="#">A</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link border rounded right-tabs" onclick="changeToActiveCase(this)" href="#">B</a>
+        <li class="nav-item building-tab d-none d-lg-block">
+          <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeToActiveCase(this, 'B')" id="secondary_case" href="#">B</a>
         </li>
       </ul>
-      
+      <!--tabs for mobile-->
+      <ul class="nav nav-pills  mobile-tabs position-absolute bottom-0 start-50 translate-middle">
+          <li class="nav-item d-block d-lg-none">
+            <a class="nav-link bg-dark text-white active-right-tab border rounded" aria-current="page" id="default_mobile" onclick="changeToActiveMobileTab(this, 'A')" href="#">A</a>
+          </li>
+          <li class="nav-item d-block d-lg-none">
+            <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeToActiveMobileTab(this, 'B')" id="secondary_mobile" href="#">B</a>
+          </li>
+        </ul>
+      <!--MAP-->
+        <center><h1>TEST IMG</h1></center>
+      <img src="media/img/test_img.jpg" alt="Map" class="responsive_img">
+     
       
       <!-- My js -->
       <script src="js/script.js"></script>
+      <!--Fontawesome-->
+      <script src="https://kit.fontawesome.com/2d3c6e88d4.js" crossorigin="anonymous"></script>
       <!-- END -->
   </body>
 </html>

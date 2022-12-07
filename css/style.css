@@ -1,3 +1,9 @@
+body{
+    height:100%;
+}
+li{
+    list-style-type: none;
+}
 .right-tabs:hover{
 border:1px solid #292b2c !important;
 }
@@ -5,12 +11,26 @@ border:1px solid #292b2c !important;
     font-family: Arial, Helvetica, sans-serif;
 }
 .active-right-tab{
-    background-color:#0275d8;
-    color:white;
+    background-color:#0275d8 !important;
+    color:white !important;
 }
 .all-right-tabs{
     float: right;
     position: fixed;
-    right: 0; 
+    right: 0px; 
     top:300px;
 }
+.responsive_img {
+    width: 100%;
+    height: auto;
+    max-height:90vh;
+  }
+/*.search-nav{
+    display: none;
+}
+@media screen and (min-width: 992px) {
+    .search-nav{
+        display:block;
+    }
+  }
+*/ 

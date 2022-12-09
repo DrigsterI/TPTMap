@@ -1,11 +1,23 @@
-const express = require('express')
-const app = express()
-const port = 3000
+const express = require('express');
+const nunjucks = require('nunjucks');
+
+const app = express();
+
+app.set('view engine', 'html');
+app.set('views', './views');
+
+app.use(express.static('./public'));
+
+nunjucks.configure('views', {
+  autoescape: true,
+  express: app
+});
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.render('index');
 })
 
+const port = 3000;
 app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}/`)
+  console.log(`Server is running at http://localhost:${port}/`);
 })

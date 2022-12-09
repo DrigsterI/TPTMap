@@ -1,7 +1,7 @@
 var lastClickFloor
 var lastClickCase
 var lastClickCaseMobile
-function changeToActiveFloor(CurrentTab) { 
+function changeToActiveFloor(CurrentTab) {
     if ( lastClickFloor === undefined) {
         lastClickFloor = document.getElementById("default_floor");
         lastClickFloor.classList.remove("active-right-tab");
@@ -14,6 +14,7 @@ function changeToActiveFloor(CurrentTab) {
 
   }
   function changeToActiveCase(CurrentTabCase, buttonCode) { 
+    console.log(buttonCode);
     if ( lastClickCase === undefined) {
         lastClickCase = document.getElementById("default_case");
         lastClickCase.classList.remove("active-right-tab");
@@ -26,11 +27,15 @@ function changeToActiveFloor(CurrentTab) {
         addActive.classList.add("active-right-tab");
         removeActive = document.getElementById("secondary_mobile");
         removeActive.classList.remove("active-right-tab");
+        removeActive = document.getElementById("secondary_case");
+        removeActive.classList.remove("active-right-tab");
     }
     else if (buttonCode == 'B'){
         addActive = document.getElementById("secondary_mobile");
         addActive.classList.add("active-right-tab");
         removeActive = document.getElementById("default_mobile");
+        removeActive.classList.remove("active-right-tab");
+        removeActive = document.getElementById("default_case");
         removeActive.classList.remove("active-right-tab");
     }
     CurrentTabCase.classList.add("active-right-tab");
@@ -38,6 +43,7 @@ function changeToActiveFloor(CurrentTab) {
 
   }
   function changeToActiveMobileTab(CurrentTabCaseMobile, buttonCode) { 
+    console.log(buttonCode);
     if ( lastClickCaseMobile === undefined) {
         lastClickCaseMobile = document.getElementById("default_mobile");
         lastClickCaseMobile.classList.remove("active-right-tab");

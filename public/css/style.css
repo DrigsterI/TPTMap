@@ -25,6 +25,9 @@ border:1px solid #292b2c !important;
     height: auto;
     max-height:90vh;
   }
+.my-absolute{
+    position: absolute;
+}
 /*.search-nav{
     display: none;
 }

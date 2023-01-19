@@ -26,7 +26,7 @@ app.get('/search', (req, res) => {
     const groupByName = {};
     let roomRegex = /^[a-zA-Z](?!000)[0-9]{3}$/;
     if(search.match(roomRegex)){
-      return res.send(search);
+      return res.json({room: search});
     }
     else{
       const searchedGroupId = search;
@@ -132,35 +132,35 @@ app.get('/search', (req, res) => {
                   let timeIndex = Object.keys(dayData).indexOf(time);
                   if (date.getHours() === hours && Math.abs(date.getMinutes() - minutes) <= 15) {
                     nextRoom = dayData[time];
-                    return res.send(`${nextRoom}`);
+                    return res.json({room: nextRoom});
                   }
                   else if(date.getHours() < hours && date.getMinutes() === minutes) {
                     if(timeIndex < Object.keys(dayData).length - 1){
                       nextRoom = Object.values(dayData)[timeIndex + 1];
-                      return res.send(`${nextRoom}`);
+                      return res.json({room: nextRoom});
                     }
                   }
                 }
 
                 if(nextRoom == null){
-                  return res.sendStatus(404);
+                  return res.json({error: "No next rooms"});
                 }
               });
             }).on("error", (err) => {
-              return res.send("Error: " + err.message);
+              return res.json({error: err.message});
             });
           }
           else{
-            return res.sendStatus(404);
+            return res.json({error: "Group not found"});
           }
         });
       }).on("error", (err) => {
-        return res.send("Error: " + err.message);
+        return res.json({error: err.message});
       });
     }
   }
   else{
-    res.send("No search property");
+    res.json({error: "No search property"});
   }
 })
 

@@ -3,6 +3,8 @@ import Map from '/ol/Map.js';
 import View from '/ol/View.js';
 import {composeCssTransform} from '/ol/transform.js';
 
+let MapName = 'TPT_MAP.svg';
+let MapPath = '/imgs/' + MapName;
 let range = 100;
 
 const map = new Map({
@@ -18,7 +20,7 @@ const map = new Map({
 
 const svgContainer = document.createElement('div');
 const xhr = new XMLHttpRequest();
-xhr.open('GET', '/imgs/TPT_MAP.svg');
+xhr.open('GET', MapPath);
 xhr.addEventListener('load', function () {
   const svg = xhr.responseXML.documentElement;
   svgContainer.ownerDocument.importNode(svg);

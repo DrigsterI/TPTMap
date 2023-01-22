@@ -3,11 +3,14 @@ import Map from '/ol/Map.js';
 import View from '/ol/View.js';
 import {composeCssTransform} from '/ol/transform.js';
 
+let range = 100;
+
 const map = new Map({
   target: 'map',	
   view: new View({
     center: [0, 0],
-    extent: [-180, -90, 180, 90],
+//    extent: [-180, -90, 180, 90],
+    extent: [-range, -range, range, range],
     projection: 'EPSG:4326',
     zoom: 2,
   }),
@@ -23,12 +26,14 @@ xhr.addEventListener('load', function () {
 });
 xhr.send();
 
-const width = 2560;
-const height = 1280;
-const svgResolution = 360 / width;
-svgContainer.style.width = width/2 + 'px';
-svgContainer.style.height = height/3 + 'px';
-svgContainer.style.transformOrigin = 'top left';
+const width = 2500;
+const height = 2500;
+//const svgResolution = 360 / width;
+const svgResolution = 200 / width;
+//svgContainer.style.width = width/2 + 'px';
+svgContainer.style.width = '100%';
+svgContainer.style.height = '100%';
+//svgContainer.style.transformOrigin = 'top left';
 svgContainer.className = 'svg-layer';
 
 map.addLayer(

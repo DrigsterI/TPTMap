@@ -9,7 +9,7 @@
     <!--My css-->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="./ol/ol.css"> <!-- Map Buttons css-->
-	<!--Title-->
+    <!--Title-->
     <title>Tptmap</title>
   </head>
   <body>
@@ -26,27 +26,27 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Download app</a>
-                </li>
-                <li class="nav-item">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Download app</a>
+              </li>
+              <li class="nav-item">
                   <a class="nav-link" href="/about">About us</a>
-                </li>
-                <form action="/search" method="GET">
-                    <li class="nav-item search-nav d-none d-lg-block">
-                      <div class="input-group rounded">
-                        <input type="search" name="search" class="form-control rounded" placeholder="Search class/group/etc." aria-label="Search" aria-describedby="search-addon" />
-                        <button class="input-group-text border-0" id="search-addon" type="submit">
-                          <i class="fas fa-search"></i>
-                        </button>
-                      </div>
-                    </li>
-                </form>
-              </ul>
+              </li>
+              <form action="/search" method="GET">
+                  <li class="nav-item search-nav d-none d-lg-block">
+                    <div class="input-group rounded">
+                      <input type="search" name="search" class="form-control rounded" placeholder="Search class/group/etc." aria-label="Search" aria-describedby="search-addon" />
+                      <button class="input-group-text border-0" id="search-addon" type="submit">
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                  </li>
+              </form>
+            </ul>
             <a class="navbar-brand d-none d-lg-block" href="#">Tptmap</a>
           </div>
           <li class="nav-item search-nav d-block d-lg-none">
@@ -98,10 +98,12 @@
           </li>
         </ul>
       <!--MAP-->
-        
-	  <div id="map" class="map"></div>
-	  <script src="https://cdn.jsdelivr.net/npm/elm-pep@1.0.6/dist/elm-pep.js"></script>
-    <script type="module" src="js/map.js"></script>
+      
+        <center><h1>TEST IMG</h1></center>
+        <object data="imgs/bitmap.svg" type="image/svg+xml" id="bitmapsvg" width="100%" height="100%"></object>
+        <div id="map" class="map"></div>
+        <script src="https://cdn.jsdelivr.net/npm/elm-pep@1.0.6/dist/elm-pep.js"></script>
+        <script type="module" src="js/map.js"></script>
       
       
       <!-- My js -->
@@ -114,3 +116,22 @@
       <!-- END -->
   </body>
 </html>
+<script>
+  
+
+  window.onload = (event) => {
+
+//alert("Document loaded, including graphics and embedded documents (like SVG)");
+var a = document.getElementById("bitmapsvg");
+
+//get the inner DOM of alpha.svg
+var svgDoc = a.contentDocument;
+//console.log(svgDoc)
+//get the inner element by id
+var delta = svgDoc.getElementById("A308");
+//delta.setProperty("style:fill", "yellow");
+delta.style.fill = "red"
+console.log(delta);
+};
+
+</script>

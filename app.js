@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 
 app.get('/search', (req, res) => {
   if(req.query["search"]){
-    const search = req.query["search"];
+    const search = req.query["search"].toUpperCase();
     const groupIdsUrl = "https://tahvel.edu.ee/hois_back/timetables/group/14?lang=ET";
     const groupByName = {};
     let roomRegex = /^[a-zA-Z](?!000)[0-9]{3}$/;

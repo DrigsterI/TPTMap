@@ -20,13 +20,14 @@ app.get('/', (req, res) => {
 })
 
 app.get('/search', (req, res) => {
+  const returnUrl = "..";
   if(req.query["search"]){
     const search = req.query["search"].toUpperCase();
     const groupIdsUrl = "https://tahvel.edu.ee/hois_back/timetables/group/14?lang=ET";
     const groupByName = {};
     let roomRegex = /^[a-zA-Z](?!000)[0-9]{3}$/;
     if(search.match(roomRegex)){
-      return res.json({room: search});
+      return res.redirect(returnUrl + "?room=" + search);
     }
     else{
       const searchedGroupId = search;
@@ -113,7 +114,7 @@ app.get('/search', (req, res) => {
             
                 sortedDates.forEach((date) => {
                   sortedRoomsByDay[date] = roomsByDay[date];
-                }); 
+                });
                 
                 let dayData = [];
                 if(sortedRoomsByDay[dateToday]){
@@ -132,35 +133,35 @@ app.get('/search', (req, res) => {
                   let timeIndex = Object.keys(dayData).indexOf(time);
                   if (date.getHours() === hours && Math.abs(date.getMinutes() - minutes) <= 15) {
                     nextRoom = dayData[time];
-                    return res.json({room: nextRoom});
+                    return res.redirect(returnUrl + "?room=" + nextRoom);
                   }
                   else if(date.getHours() < hours && date.getMinutes() === minutes) {
                     if(timeIndex < Object.keys(dayData).length - 1){
                       nextRoom = Object.values(dayData)[timeIndex + 1];
-                      return res.json({room: nextRoom});
+                      return res.redirect(returnUrl + "?room=" + nextRoom);
                     }
                   }
                 }
 
                 if(nextRoom == null){
-                  return res.json({error: "No next rooms"});
+                  return res.redirect(returnUrl + "?error=" + "No next rooms");
                 }
               });
             }).on("error", (err) => {
-              return res.json({error: err.message});
+              return res.redirect(returnUrl + "?error=" + err.message);
             });
           }
           else{
-            return res.json({error: "Group not found"});
+            return res.redirect(returnUrl + "?error=" + "Group not found");
           }
         });
       }).on("error", (err) => {
-        return res.json({error: err.message});
+        return res.redirect(returnUrl + "?error=" + err.message);
       });
     }
   }
   else{
-    res.json({error: "No search property"});
+    return res.redirect(returnUrl + "?error=" + "No search property");
   }
 })
 

@@ -119,19 +119,21 @@
 <script>
   
 
-  window.onload = (event) => {
+    window.onload = (event) => {
+        Mesto = String(window.location.href)
+        klass = Mesto.slice(-4)
+        console.log(klass)
+            //alert("Document loaded, including graphics and embedded documents (like SVG)");
+        var a = document.getElementById("bitmapsvg");
 
-//alert("Document loaded, including graphics and embedded documents (like SVG)");
-var a = document.getElementById("bitmapsvg");
-
-//get the inner DOM of alpha.svg
-var svgDoc = a.contentDocument;
-//console.log(svgDoc)
-//get the inner element by id
-var delta = svgDoc.getElementById("A308");
-//delta.setProperty("style:fill", "yellow");
-delta.style.fill = "red"
-console.log(delta);
-};
+        //get the inner DOM of alpha.svg
+        var svgDoc = a.contentDocument;
+        //console.log(svgDoc)
+        //get the inner element by id
+        var delta = svgDoc.getElementById(klass);
+        //delta.setProperty("style:fill", "yellow");
+        delta.style.fill = "red"
+        console.log(delta);
+    };
 
 </script>

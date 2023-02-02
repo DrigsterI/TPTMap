@@ -10,14 +10,21 @@ app.set('views', './views');
 
 app.use(express.static('./public'));
 
-nunjucks.configure('views', {
+const env = nunjucks.configure('views', {
   autoescape: true,
   express: app
 });
 
+const port = 3000;
+
 app.get('/', (req, res) => {
-  res.render('index');
-})
+  res.redirect('/A/1');
+});
+
+app.get('/:building/:floor', (req, res) => {
+  // TODO: Fix vulnurability
+  res.render('index', { mapUrl: `/imgs/maps/${req.params.building}/${req.params.floor}.svg` });
+});
 
 app.get('/about', (req, res) => {
   res.render('aboutus');
@@ -169,7 +176,6 @@ app.get('/search', (req, res) => {
   }
 });
 
-const port = 3000;
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}/`);
 })

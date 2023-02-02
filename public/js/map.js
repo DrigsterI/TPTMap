@@ -3,8 +3,9 @@ import Map from '/ol/Map.js';
 import View from '/ol/View.js';
 import {composeCssTransform} from '/ol/transform.js';
 
-let MapName = 'TPT_MAP.svg';
-let MapPath = '/imgs/' + MapName;
+//let MapName = 'TPT_MAP.svg';
+//let MapPath = '/imgs/' + MapName;
+let MapPath = window.mapUrl;
 let range = 100;
 
 const map = new Map({

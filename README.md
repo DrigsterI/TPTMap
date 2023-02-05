@@ -1,5 +1,18 @@
 # TPTmap
 
+## Credits
+
+#### By _**Team-Lead: Maksim Verzbitski git: MaksimVerzbitski**_
+#### _**Backend: Gabriel Joe  git: DrigsterI**_
+#### _**Map features dev: Daniel Ussov git: DanielUssov | Mark Jaromisin git: ImAMLazy**_
+#### _**Сartographer: Dmitri Siljukov git: DmitriSiljukov | Arseni Vostrikov  git: Homa4ok**_
+#### _**Frontend: Aleksander Shanchuk  git: NogutiCode | Denis Lesnikov  git: Iteey**_
+
+
+
+***********************************************************************************************************************
+## Description
+
 TPT Map Web App application in which the map of the TPT building with 5 floors and 4 buildings.
 Easy to use with nice interface.
 The application is intended for first-year students who are already studying, parents of students and school employees.
@@ -16,63 +29,61 @@ The application is intended for first-year students who are already studying, pa
 9. Exit
 ***********************************************************************************************************************
 ### Prerequisites ###
-**Project dependencies and how to install them:**
-Back-end: [Node.js](https://nodejs.org/en/) | [Express.js](Node.js)
 
+## Project Dependencies
 
+This project uses the following dependencies:
 
-**Download the installer from NodeJS WebSite.*
+- Front-end: [Bootstrap](https://getbootstrap.com/)
 
-**Run the installer.*
+- Map Library: [OpenLayers](https://openlayers.org/)
 
-**Follow the installer steps, agree the license agreement and click the next button.*
+- Map Format: [SVG](https://www.w3schools.com/graphics/svg_intro.asp)
 
-**Restart your system/machine.*
-<p>&nbsp;</p>
-- [ ] Assuming You have node and npm properly installed on the machine
+## Installation
 
-- [ ] Download the code
+Follow these steps to install the dependencies for this project:
 
-- [ ] Navigate to inside the project folder on terminal, where I would hopefully see a package.json file
-
-- [ ] Do an npm install for installing all the project dependencies
-
-- [ ] Do an npm install -g nodemon for installing all the project dependencies
-
-- [ ] Then npm start OR node app.js OR nodemon app.js to get the app running on local host
-use nodemon app.js ( nodemon is a utility that will monitor for any changes in your source and automatically restart your server)
-
-:tada:   :tada:   :tada:
-<p>&nbsp;</p>
-
-Create a file named _app.js_ => copy code below
+### Front-end (Bootstrap)
+``` console
+npm install bootstrap
 ```
-const http = require('http');
-
-const hostname = '127.0.0.1';
-const port = 3000;
-
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World');
-});
-
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
-```
-
-Running Hello World
-It's simple to run app.js with Node.js. From a terminal, just type:
-
-```
-node app.js
-```
-Front-end: [Bootstrap](https://getbootstrap.com/)
-
 
 
 Map Library: [OpenLayers](https://openlayers.org/)
 
-Map Format: [SVG](https://www.w3schools.com/graphics/svg_intro.asp)
+### Map Library (OpenLayers)
+
+``` console
+npm install ol
+```
+
+
+### Map Format (SVG)
+
+The SVG format is a standard web format and does not require any special installation. You can use it by including an `<svg>` element in your HTML file and using JavaScript and CSS to manipulate and style it.
+
+## Usage
+
+Once the dependencies have been installed, you can use them in your project as described in the documentation for each library.
+
+## Bugs
+
+> What do you mean? Our product is perfect!
+
+## Licence
+
+Copyright [2023] [MaksimVerzbitski]
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+

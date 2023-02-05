@@ -2,12 +2,19 @@
 
 ## Credits
 
-#### By _**Team-Lead: Maksim Verzbitski git: MaksimVerzbitski**_
-#### _**Backend: Gabriel Joe  git: DrigsterI**_
-#### _**Map features dev: Daniel Ussov git: DanielUssov | Mark Jaromisin git: ImAMLazy**_
-#### _**Сartographer: Dmitri Siljukov git: DmitriSiljukov | Arseni Vostrikov  git: Homa4ok**_
-#### _**Frontend: Aleksander Shanchuk  git: NogutiCode | Denis Lesnikov  git: Iteey**_
+This project was created by the following team members:
 
+    Team-Lead: Maksim Verzbitski (Git: MaksimVerzbitski)
+    Backend: Gabriel Joe (Git: DrigsterI)
+    Map features dev:
+        Daniel Ussov (Git: DanielUssov)
+        Mark Jaromisin (Git: ImAMLazy)
+    Cartographer:
+        Dmitri Siljukov (Git: DmitriSiljukov)
+        Arseni Vostrikov (Git: Homa4ok)
+    Frontend:
+        Aleksander Shanchuk (Git: NogutiCode)
+        Denis Lesnikov (Git: Iteey)
 
 
 ***********************************************************************************************************************

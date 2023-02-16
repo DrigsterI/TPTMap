@@ -36,7 +36,7 @@
                 <li class="nav-item">
                   <a class="nav-link" href="/about">About us</a>
                 </li>
-                <form action="/search" method="GET">
+                <form action="" method="POST">
                     <li class="nav-item search-nav d-none d-lg-block">
                       <div class="input-group rounded">
                         <input type="search" name="search" class="form-control rounded" placeholder="Search class/group/etc." aria-label="Search" aria-describedby="search-addon" />
@@ -50,12 +50,14 @@
             <a class="navbar-brand d-none d-lg-block" href="#">Tptmap</a>
           </div>
           <li class="nav-item search-nav d-block d-lg-none">
-            <div class="input-group rounded">
-              <input type="search" class="form-control rounded w-auto" placeholder="Search class/group/etc." aria-label="Search" aria-describedby="search-addon" />
-              <span class="input-group-text border-0" id="search-addon">
-                <i class="fas fa-search"></i>
-              </span>
-            </div>
+            <form action="" method="POST">
+              <div class="input-group rounded">
+                <input type="search" name="search" class="form-control rounded w-auto" placeholder="Search class/group/etc." aria-label="Search" aria-describedby="search-addon" />
+                <button class="input-group-text border-0" id="search-addon" type="submit">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </form>
           </li>
           <li class="nav-item">
             <a class="navbar-brand d-block d-lg-none align-self-start" href="#">Tptmap</a>

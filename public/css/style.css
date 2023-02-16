@@ -37,18 +37,3 @@ border:1px solid #292b2c !important;
     }
   }
 */ 
-
-
-/* css for map*/
-
-.map {
-	width: 100%;
-	height: 400px;
-}
-#map {
-	background: white;
-}
-
-.svg-layer path:hover {
-	opacity: 0.4;
-}

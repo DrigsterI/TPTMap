@@ -42,7 +42,7 @@
           <li class="nav-item">
             <a class="nav-link" href="/about">About us</a>
           </li>
-          <form action="/search" method="GET">
+          <form action="" method="POST">
             <li class="nav-item search-nav d-none d-lg-block">
               <div class="input-group rounded">
                 <input type="search" name="search" class="form-control rounded" placeholder="Search class/group/etc."
@@ -57,13 +57,15 @@
         <a class="navbar-brand d-none d-lg-block" href="#">Tptmap</a>
       </div>
       <li class="nav-item search-nav d-block d-lg-none">
-        <div class="input-group rounded">
-          <input type="search" class="form-control rounded w-auto" placeholder="Search class/group/etc."
-            aria-label="Search" aria-describedby="search-addon" />
-          <span class="input-group-text border-0" id="search-addon">
-            <i class="fas fa-search"></i>
-          </span>
-        </div>
+        <form action="" method="POST">
+          <div class="input-group rounded">
+            <input type="search" name="search" class="form-control rounded w-auto" placeholder="Search class/group/etc."
+              aria-label="Search" aria-describedby="search-addon" />
+            <button class="input-group-text border-0" id="search-addon" type="submit">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </form>
       </li>
       <li class="nav-item">
         <a class="navbar-brand d-block d-lg-none align-self-start" href="#">Tptmap</a>
@@ -74,47 +76,31 @@
   <ul class="nav flex-column align-items-end all-right-tabs">
     <h4 class="right-tabs-title me-2">Floors</h4>
     <li class="nav-item">
-      <a class="nav-link bg-dark text-white active-right-tab border rounded right-tabs" id="default_floor"
-        onclick="changeToActiveFloor(this)" href="#">1</a>
+      <a class="nav-link bg-dark text-white active-right-tab border rounded right-tabs" onclick="changeFloor(this)" href="#">1</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeToActiveFloor(this)"
-        href="#">2</a>
+      <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeFloor(this)" href="#">2</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeToActiveFloor(this)"
-        href="#">3</a>
+      <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeFloor(this)" href="#">3</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeToActiveFloor(this)"
-        href="#">4</a>
+      <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeFloor(this)" href="#">4</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeToActiveFloor(this)"
-        href="#">5</a>
+      <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeFloor(this)" href="#">5</a>
     </li>
     <h4 class="right-tabs-title me-2 mt-4 d-none d-lg-block">Building</h4>
     <li class="nav-item d-none d-lg-block">
-      <a class="nav-link bg-dark text-white active-right-tab border rounded" aria-current="page" id="default_case"
-        onclick="changeToActiveCase(this, 'A')" href="#">A</a>
+      <a class="nav-link bg-dark text-white active-right-tab border rounded" aria-current="page" id="BuildingA"
+        onclick="changeBuilding(this)" href="/A/0">A</a>
     </li>
     <li class="nav-item building-tab d-none d-lg-block">
-      <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeToActiveCase(this, 'B')"
-        id="secondary_case" href="#">B</a>
+      <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeBuilding(this)"
+        id="BuildingB" href="/B/0">B</a>
     </li>
   </ul>
-  <!--tabs for mobile-->
-  <ul class="nav nav-pills  mobile-tabs position-absolute bottom-0 start-50 translate-middle">
-    <li class="nav-item d-block d-lg-none">
-      <a class="nav-link bg-dark text-white active-right-tab border rounded" aria-current="page" id="default_mobile"
-        onclick="changeToActiveMobileTab(this, 'A')" href="#">A</a>
-    </li>
-    <li class="nav-item d-block d-lg-none">
-      <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeToActiveMobileTab(this, 'B')"
-        id="secondary_mobile" href="#">B</a>
-    </li>
-  </ul>
-  <!--MAP-->
+
 
   <object data="imgs/B0.svg" type="image/svg+xml" id="bitmapsvg" width="100%" height="100%"></object>
 
@@ -130,12 +116,27 @@
 
 </html>
 <script>
-
-
+  function changeFloor(floor) {
+    Mesto = String(window.location.href)
+    klass = Mesto.slice(-3)
+    console.log(klass)
+    etazh = floor.innerHTML;
+    zdanie = ""
+    BuildingA = document.getElementById("BuildingA")
+    BuildingB = document.getElementById("BuildingB")
+    zdanie = klass.charAt(0)
+    floor.href = "/"+zdanie + "/" + etazh
+  }
+  
   window.onload = (event) => {
     stily = "fill:rgb(10, 116, 245);stroke:rgb(10, 116, 245); stroke-width:2;fill-opacity:0.7"
     Mesto = String(window.location.href)
     klass = Mesto.slice(-4)
+    if (klass.charAt(0) == "A"){
+      BuildingA = document.getElementById("BuildingA")
+      BuildingA.classList
+    }
+
     if (klass.charAt(0) == "A" || klass.charAt(0) == "B") {
       console.log(klass)
       //alert("Document loaded, including graphics and embedded documents (like SVG)");

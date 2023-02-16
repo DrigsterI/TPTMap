@@ -1,7 +1,9 @@
+
 const express = require('express');
 const nunjucks = require('nunjucks');
 const https = require('https');
 const { json } = require('express');
+const fs = require('fs');
 
 const app = express();
 
@@ -10,28 +12,47 @@ app.set('views', './views');
 
 app.use(express.static('./public'));
 
-nunjucks.configure('views', {
+const env = nunjucks.configure('views', {
   autoescape: true,
   express: app
 });
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+const port = 3000;
+
 app.get('/', (req, res) => {
-  res.render('index');
-})
+  res.redirect('/A/1');
+});
+
+app.get('/:building/:floor', (req, res) => {
+  if(!req.params.building.match(/^[a-zA-Z]$/)){
+    return res.redirect("/");
+  }
+
+  if(!req.params.floor.match(/^[0-9]+$/)){
+    return res.redirect("/");
+  }
+  if(fs.existsSync(`/imgs/maps/${req.params.building}/${req.params.floor}.svg`)) {
+    return res.render('index', { mapUrl: `/imgs/maps/${req.params.building}/${req.params.floor}.svg` });
+  } else {
+    return res.render('index');
+  }
+});
 
 app.get('/about', (req, res) => {
   res.render('aboutus');
 });
 
-app.get('/search', (req, res) => {
-  const returnUrl = "..";
-  if(req.query["search"]){
-    const search = req.query["search"].toUpperCase();
+app.post('/:building/:floor', (req, res) => {
+  if(req.body.search){
+    const search = req.body.search.toUpperCase();
     const groupIdsUrl = "https://tahvel.edu.ee/hois_back/timetables/group/14?lang=ET";
     const groupByName = {};
     let roomRegex = /^[a-zA-Z](?!000)[0-9]{3}$/;
     if(search.match(roomRegex)){
-      return res.redirect(returnUrl + "?room=" + search);
+      return res.redirect(`/${search[0]}/${search[1]}?room=${search}`);
     }
     else{
       const searchedGroupId = search;
@@ -136,40 +157,39 @@ app.get('/search', (req, res) => {
 
                   let timeIndex = Object.keys(dayData).indexOf(time);
                   if (date.getHours() === hours && Math.abs(date.getMinutes() - minutes) <= 15) {
-                    nextRoom = dayData[time];
-                    return res.redirect(returnUrl + "?room=" + nextRoom);
+                    nextRoom = dayData[time][0];
+                    return res.redirect(`/${nextRoom[0]}/${nextRoom[1]}?room=${nextRoom}`);
                   }
                   else if(date.getHours() < hours && date.getMinutes() === minutes) {
                     if(timeIndex < Object.keys(dayData).length - 1){
-                      nextRoom = Object.values(dayData)[timeIndex + 1];
-                      return res.redirect(returnUrl + "?room=" + nextRoom);
+                      nextRoom = Object.values(dayData)[timeIndex + 1][0];
+                      return res.redirect(`/${nextRoom[0]}/${nextRoom[1]}?room=${nextRoom}`);
                     }
                   }
                 }
-
+                
                 if(nextRoom == null){
-                  return res.redirect(returnUrl + "?error=" + "No next rooms");
+                  return res.redirect("?error=" + "No next rooms");
                 }
               });
             }).on("error", (err) => {
-              return res.redirect(returnUrl + "?error=" + err.message);
+              return res.redirect("?error=" + err.message);
             });
           }
           else{
-            return res.redirect(returnUrl + "?error=" + "Group not found");
+            return res.redirect("?error=" + "Group not found");
           }
         });
       }).on("error", (err) => {
-        return res.redirect(returnUrl + "?error=" + err.message);
+        return res.redirect("?error=" + err.message);
       });
     }
   }
   else{
-    return res.redirect(returnUrl + "?error=" + "No search property");
+    return res.redirect("?error=" + "No search property");
   }
 });
 
-const port = 3000;
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}/`);
 })

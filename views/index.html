@@ -100,11 +100,17 @@
           </li>
         </ul>
       <!--MAP-->
-        
-	  <div id="map" class="map"></div>
-    <script type="text/javascript">
-      window.mapUrl = "{{ mapUrl }}";
-    </script>
+    {% if mapUrl %}
+      <div id="map" class="map"></div>
+      <script type="text/javascript">
+        window.mapUrl = "{{ mapUrl }}";
+      </script>
+      <script type="module" src="/js/map.js"></script>
+    {% else %}
+      <div>
+        <h1>Map not found!</h1>
+      </div>
+    {% endif %}
 	  <script src="https://cdn.jsdelivr.net/npm/elm-pep@1.0.6/dist/elm-pep.js"></script>
     <script type="module" src="/js/map.js"></script>
       
@@ -113,7 +119,6 @@
     <script src="/js/script.js"></script>
 	  <!-- js For Map -->
 	  <script src="https://cdn.jsdelivr.net/npm/elm-pep@1.0.6/dist/elm-pep.js"></script>
-    <script type="module" src="/js/map.js"></script>
       <!--Fontawesome-->
       <script src="https://kit.fontawesome.com/2d3c6e88d4.js" crossorigin="anonymous"></script>
       <!-- END -->

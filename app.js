@@ -2,6 +2,7 @@ const express = require('express');
 const nunjucks = require('nunjucks');
 const https = require('https');
 const { json } = require('express');
+const fs = require('fs');
 
 const app = express();
 
@@ -25,8 +26,18 @@ app.get('/', (req, res) => {
 });
 
 app.get('/:building/:floor', (req, res) => {
-  // TODO: Fix vulnurability
-  res.render('index', { mapUrl: `/imgs/maps/${req.params.building}/${req.params.floor}.svg` });
+  if(!req.params.building.match(/^[a-zA-Z]$/)){
+    return res.redirect("/");
+  }
+
+  if(!req.params.floor.match(/^[0-9]+$/)){
+    return res.redirect("/");
+  }
+  if(fs.existsSync(`/imgs/maps/${req.params.building}/${req.params.floor}.svg`)) {
+    return res.render('index', { mapUrl: `/imgs/maps/${req.params.building}/${req.params.floor}.svg` });
+  } else {
+    return res.render('index');
+  }
 });
 
 app.get('/about', (req, res) => {

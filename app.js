@@ -41,10 +41,6 @@ app.get('/:building/:floor', (req, res) => {
   }
 });
 
-app.get('/about', (req, res) => {
-  res.render('aboutus');
-});
-
 app.post('/:building/:floor', (req, res) => {
   if (req.body.search) {
     const search = req.body.search.toUpperCase();
@@ -198,6 +194,10 @@ app.post('/:building/:floor', (req, res) => {
   else {
     return res.redirect("?error=" + "No search property");
   }
+});
+
+app.get('/about', (req, res) => {
+  res.render('aboutus');
 });
 
 app.listen(port, () => {

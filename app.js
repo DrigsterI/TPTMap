@@ -1,3 +1,4 @@
+
 const express = require('express');
 const nunjucks = require('nunjucks');
 const https = require('https');
@@ -26,6 +27,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/:building/:floor', (req, res) => {
+<<<<<<< HEAD
   if (!req.params.building.match(/^[a-zA-Z]$/)) {
     return res.redirect("/");
   }
@@ -34,6 +36,16 @@ app.get('/:building/:floor', (req, res) => {
     return res.redirect("/");
   }
   if (fs.existsSync(`/imgs/maps/${req.params.building}/${req.params.floor}.svg`)) {
+=======
+  if(!req.params.building.match(/^[a-zA-Z]$/)){
+    return res.redirect("/");
+  }
+
+  if(!req.params.floor.match(/^[0-9]+$/)){
+    return res.redirect("/");
+  }
+  if(fs.existsSync(`/imgs/maps/${req.params.building}/${req.params.floor}.svg`)) {
+>>>>>>> feature/highlight
     return res.render('index', { mapUrl: `/imgs/maps/${req.params.building}/${req.params.floor}.svg` });
   } else {
     return res.render('index');
@@ -45,12 +57,21 @@ app.get('/about', (req, res) => {
 });
 
 app.post('/:building/:floor', (req, res) => {
+<<<<<<< HEAD
   if (req.body.search) {
     const search = req.body.search.toUpperCase();
     const groupIdsUrl = "https://tahvel.edu.ee";
     const groupByName = {};
     let roomRegex = /^[a-zA-Z](?!000)[0-9]{3}$/;
     if (search.match(roomRegex)) {
+=======
+  if(req.body.search){
+    const search = req.body.search.toUpperCase();
+    const groupIdsUrl = "https://tahvel.edu.ee/hois_back/timetables/group/14?lang=ET";
+    const groupByName = {};
+    let roomRegex = /^[a-zA-Z](?!000)[0-9]{3}$/;
+    if(search.match(roomRegex)){
+>>>>>>> feature/highlight
       return res.redirect(`/${search[0]}/${search[1]}?room=${search}`);
     }
     else {
@@ -72,6 +93,7 @@ app.post('/:building/:floor', (req, res) => {
               const groupNameEt = group.nameEt;
               const groupNameEn = group.nameEn;
 
+<<<<<<< HEAD
               groupByName[groupNameEt] = groupId;
               if (!groupByName[groupNameEn]) {
                 groupByName[groupNameEn] = groupId;
@@ -187,6 +209,31 @@ app.post('/:building/:floor', (req, res) => {
           } catch (error) {
             console.log("Search error: " + error);
             return res.redirect("?error=" + "Server error");
+=======
+                  let timeIndex = Object.keys(dayData).indexOf(time);
+                  if (date.getHours() === hours && Math.abs(date.getMinutes() - minutes) <= 15) {
+                    nextRoom = dayData[time][0];
+                    return res.redirect(`/${nextRoom[0]}/${nextRoom[1]}?room=${nextRoom}`);
+                  }
+                  else if(date.getHours() < hours && date.getMinutes() === minutes) {
+                    if(timeIndex < Object.keys(dayData).length - 1){
+                      nextRoom = Object.values(dayData)[timeIndex + 1][0];
+                      return res.redirect(`/${nextRoom[0]}/${nextRoom[1]}?room=${nextRoom}`);
+                    }
+                  }
+                }
+                
+                if(nextRoom == null){
+                  return res.redirect("?error=" + "No next rooms");
+                }
+              });
+            }).on("error", (err) => {
+              return res.redirect("?error=" + err.message);
+            });
+          }
+          else{
+            return res.redirect("?error=" + "Group not found");
+>>>>>>> feature/highlight
           }
         });
       }).on("error", (err) => {
@@ -194,7 +241,11 @@ app.post('/:building/:floor', (req, res) => {
       });
     }
   }
+<<<<<<< HEAD
   else {
+=======
+  else{
+>>>>>>> feature/highlight
     return res.redirect("?error=" + "No search property");
   }
 });

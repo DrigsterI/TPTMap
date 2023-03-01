@@ -1,20 +1,34 @@
+<<<<<<< HEAD
 # TPTmap
 
 ## Credits
 
-This project was created by the following team members:
+### This project was created by the following team members:
 
-    Team-Lead: Maksim Verzbitski (Git: MaksimVerzbitski)
-    Backend: Gabriel Joe (Git: DrigsterI)
-    Map features dev:
-        Daniel Ussov (Git: DanielUssov)
-        Mark Jaromisin (Git: ImAMLazy)
-    Cartographer:
-        Dmitri Siljukov (Git: DmitriSiljukov)
-        Arseni Vostrikov (Git: Homa4ok)
-    Frontend:
-        Aleksander Shanchuk (Git: NogutiCode)
-        Denis Lesnikov (Git: Iteey)
+Team-Lead: Maksim Verzbitski Github: [MaksimVerzbitski](https://github.com/MaksimVerzbitski)
+
+Backend: Gabriel Joe Github: [DrigsterI](https://github.com/DrigsterI)
+
+Map features dev:
+
+- Daniel Ussov Github: [DanielUssov](https://github.com/DanielUssov)
+        
+- Mark Jaromisin Github: [ImAMLazy](https://github.com/ImAMLazy
+
+Cartographer:
+
+- Dmitri Siljukov Github: [DmitriSiljukov](https://github.com/DmitriSiljukov)
+
+- Arseni Vostrikov Github: [Homa4ok](https://github.com/Hom4ok)
+
+Frontend:
+
+- Aleksander Shanchuk Github: [NogutiCode](https://github.com/NogutiCode)
+
+- Denis Lesnikov Github: [Iteey]((https://github.com/Iteey)
+
+
+
 
 
 ***********************************************************************************************************************
@@ -94,3 +108,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
+=======
+# TPTMap
+>>>>>>> feature/highlight

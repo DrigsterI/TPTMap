@@ -52,3 +52,11 @@ border:1px solid #292b2c !important;
 .svg-layer path:hover {
 	opacity: 0.4;
 }
+.sidenavbutton{
+    position:absolute;
+    cursor: pointer;
+    top:1px;
+}
+.mtcss-1{
+    margin-top:15px !important;
+}

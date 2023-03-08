@@ -29,11 +29,11 @@
             <a href="views/aboutus.html">About us</a>
         </div>
         <!-- Use any element to open the sidenav -->
-        <span onclick="openNav()">
+        <span onclick="openNav()" class="sidenavbutton">
             <i class="fa fa-bars fa-2x ms-3 mt-3"></i>
         </span>
         <!--Search bar-->
-        <div class="d-flex align-items-center justify-content-center vh-100 flex-column gap-4 mb-5 mt-0">
+        <div class="d-flex align-items-center justify-content-center vh-100 flex-column gap-4 mb-5 mt-2 mtcss-1">
             <form class="d-flex">
                 <input class="form-control me-1" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-primary" type="submit">Search</button>
@@ -46,7 +46,10 @@
                         class="nav-link bg-dark text-white active-right-tab border rounded right-tabs"
                         id="default_floor"
                         onclick="changeFloor(this)"
-                        href="#">1</a>
+                        href="#">0</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeFloor(this)" href="#">1</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeFloor(this)" href="#">2</a>
@@ -56,9 +59,6 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeFloor(this)" href="#">4</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeFloor(this)" href="#">5</a>
                 </li>
                 <h4 class="right-tabs-title me-2 mt-4 d-none d-lg-block">Building</h4>
                 <li class="nav-item d-none d-lg-block">

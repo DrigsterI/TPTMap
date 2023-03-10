@@ -9,7 +9,6 @@ import {composeCssTransform} from '/ol/transform.js';
 //
 let MapPath = window.mapUrl;
 let range = 100;
-console.log(MapPath);
 const map = new Map({
   target: 'map',	
   view: new View({
@@ -24,10 +23,8 @@ const xhr = new XMLHttpRequest();
 xhr.open('GET', MapPath);
 xhr.addEventListener('load', function () {
   const svg = xhr.responseXML.documentElement;
-  console.log(svg)
   svgContainer.ownerDocument.importNode(svg);
   svgContainer.appendChild(svg);
-  console.log(svgContainer)
 });
 xhr.send();
 

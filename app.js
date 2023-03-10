@@ -23,7 +23,7 @@ app.use(express.json());
 const port = 3000;
 
 app.get('/', (req, res) => {
-  res.redirect('/A/1');
+  res.redirect('/A/0');
 });
 
 app.get('/:building/:floor', (req, res) => {

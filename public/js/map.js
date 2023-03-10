@@ -6,10 +6,10 @@ import {composeCssTransform} from '/ol/transform.js';
 //let MapName = '0.svg';
 //let MapPath = './imgs/maps/A/' + MapName;
 //let MapPath = '/imgs/maps/A/0.svg';
-//console.log(MapPath);
+//
 let MapPath = window.mapUrl;
 let range = 100;
-
+console.log(MapPath);
 const map = new Map({
   target: 'map',	
   view: new View({
@@ -18,14 +18,16 @@ const map = new Map({
     zoom: 2,
   }),
 });
-
+//<object data="imgs/B0.svg" type="image/svg+xml" id="bitmapsvg" width="100%" height="100%"></object>
 const svgContainer = document.createElement('div');
 const xhr = new XMLHttpRequest();
 xhr.open('GET', MapPath);
 xhr.addEventListener('load', function () {
   const svg = xhr.responseXML.documentElement;
+  console.log(svg)
   svgContainer.ownerDocument.importNode(svg);
   svgContainer.appendChild(svg);
+  console.log(svgContainer)
 });
 xhr.send();
 
@@ -60,15 +62,3 @@ map.addLayer(
     },
   })
 );
-
-
-
-
-
-
-
-
-
-
-
-

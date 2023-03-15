@@ -22,6 +22,30 @@ app.use(express.json());
 
 const port = 3000;
 
+
+var ru = { Floors:"Этажы", Building: "Корпуса", Home:"Домашняя страница", AboutUs: "О Нас"};
+var est = { Floors:"Põrand", Building: "Hoone", Home:"Koduleht", AboutUs: "Meist"};
+var eng = { Floors:"Floors", Building: "Building", Home:"Home", AboutUs: "AboutUs"};
+
+
+var localization = eng;
+
+app.get('/ru', (req, res) => {
+  localization = ru;
+  return res.redirect("/");
+});
+
+app.get('/est', (req, res) => {
+  localization = est;
+  return res.redirect("/");
+});
+
+app.get('/eng', (req, res) => {
+  localization = eng;
+  return res.redirect("/");
+});
+
+
 app.get('/', (req, res) => {
   res.redirect('/A/1');
 });
@@ -38,9 +62,9 @@ app.get('/:building/:floor', (req, res) => {
     return res.redirect("/");
   }
   if (fs.existsSync(`public/imgs/maps/${req.params.building}/${req.params.floor}.svg`)) {
-    return res.render('index', { mapUrl: `/imgs/maps/${req.params.building}/${req.params.floor}.svg` });
+    return res.render('index', { mapUrl: `/imgs/maps/${req.params.building}/${req.params.floor}.svg`, items: localization });
   }
-  return res.render('index');
+  return res.render('index', {items: localization});
 });
 
 app.post('/:building/:floor', (req, res) => {

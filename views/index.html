@@ -28,8 +28,23 @@
         <!--main navbar start-->
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a href="/">Home</a>
-            <a href="/about">About us</a>
+            <a href="/ru">rus</a>
+            <a href="/est">est</a>
+            <a href="/eng">eng</a>
+            <a href="/">
+                {% if items %}
+                    <a class="nav-link" href="">{{ items.Home }}</a>
+                {% else %}                            
+                    <a class="nav-link" href="">Home</a>
+                {% endif %}
+            </a>
+            <a href="/about">
+                {% if items %}
+                    <a class="nav-link" href="">{{ items.AboutUs }}</a>
+                {% else %}                            
+                    <a class="nav-link" href="">AboutUs</a>
+                {% endif %}
+            </a>
             
         </div>
         <!-- Use any element to open the sidenav -->
@@ -45,7 +60,13 @@
 
             <!--Right tabs-->
             <ul class="nav flex-column align-items-end all-right-tabs">
-                <h4 class="right-tabs-title me-2">Floors</h4>
+                <h4 class="right-tabs-title me-2">
+                    {% if items %}
+                        <a class="nav-link" href="">{{ items.Floors }}</a>
+                    {% else %}                            
+                        <a class="nav-link" href="">Floors</a>
+                    {% endif %}
+                </h4>
                 <li class="nav-item">
                     <a
                         class="nav-link bg-dark text-white active-right-tab border rounded right-tabs"
@@ -65,7 +86,13 @@
                 <li class="nav-item">
                     <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeFloor(this)" href="#">4</a>
                 </li>
-                <h4 class="right-tabs-title me-2 mt-4 d-none d-lg-block">Building</h4>
+                <h4 class="right-tabs-title me-2 mt-4 d-none d-lg-block">
+                    {% if items %}
+                        <a class="nav-link" href="">{{ items.Building }}</a>
+                    {% else %}                            
+                        <a class="nav-link" href="">Building</a>
+                    {% endif %}
+                </h4>
                 <li class="nav-item d-none d-lg-block">
                     <a
                         class="nav-link bg-dark text-white active-right-tab border rounded"

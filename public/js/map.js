@@ -3,19 +3,20 @@ import Map from '/ol/Map.js';
 import View from '/ol/View.js';
 import {composeCssTransform} from '/ol/transform.js';
 
-//let MapName = 'TPT_MAP.svg';
-//let MapPath = '/imgs/' + MapName;
+//let MapName = '0.svg';
+//let MapPath = './imgs/maps/A/' + MapName;
+//let MapPath = '/imgs/maps/A/0.svg';
+//console.log(MapPath);
 let MapPath = window.mapUrl;
-let range = 100;
 
 const map = new Map({
   target: 'map',	
   view: new View({
     center: [0, 0],
-//    extent: [-180, -90, 180, 90],
-    extent: [-range, -range, range, range],
     projection: 'EPSG:4326',
-    zoom: 2,
+    zoom: 4.6,
+    minZoom: 4,
+    maxZoom: 6,
   }),
 });
 
@@ -29,13 +30,13 @@ xhr.addEventListener('load', function () {
 });
 xhr.send();
 
-const width = 2500;
-const height = 2500;
+const width = window.innerWidth;
+const height = window.innerHeight;
 //const svgResolution = 360 / width;
-const svgResolution = 200 / width;
+const svgResolution = 100 / width;
 //svgContainer.style.width = width/2 + 'px';
-svgContainer.style.width = '100%';
-svgContainer.style.height = '100%';
+svgContainer.style.width = width + 'px';
+svgContainer.style.height = height + 'px';
 //svgContainer.style.transformOrigin = 'top left';
 svgContainer.className = 'svg-layer';
 
@@ -46,13 +47,13 @@ map.addLayer(
       const center = frameState.viewState.center;
       const size = frameState.size;
       const cssTransform = composeCssTransform(
-        size[0] / 2,
-        size[1] / 2,
-        scale,
-        scale,
-        frameState.viewState.rotation,
-        -center[0] / svgResolution - width / 2,
-        center[1] / svgResolution - height / 2
+        0, // start x
+        -100, // start y
+        scale, // for zooming (from frameState)
+        scale, // 
+        frameState.viewState.rotation, // rotation
+        -center[0] / svgResolution, // move left (-)
+        center[1] / svgResolution //move up (-)
       );
       svgContainer.style.transform = cssTransform;
       svgContainer.style.opacity = this.getOpacity();

@@ -28,9 +28,6 @@
         <!--main navbar start-->
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a href="/ru">rus</a>
-            <a href="/est">est</a>
-            <a href="/eng">eng</a>
             <a href="/">
                 {% if items %}
                     <a class="nav-link" href="">{{ items.Home }}</a>
@@ -45,6 +42,19 @@
                     <a class="nav-link" href="">AboutUs</a>
                 {% endif %}
             </a>
+            
+        <ul>
+            <a style="color:white">Languages:</a>
+            <li>
+                <a href="/ru">Русский</a>
+            </li>
+            <li>
+                <a href="/est">Eesti</a>
+            </li>
+            <li>
+                <a href="/eng">English</a>
+            </li>
+        </ul>
             
         </div>
         <!-- Use any element to open the sidenav -->

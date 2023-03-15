@@ -26,25 +26,24 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"> </script>
         <!--main navbar start-->
-        <div id="mySidenav" class="sidenav">
+        <div id="mySidenav" class="sidenav" style="z-index: 7;">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <a href="/">Home</a>
             <a href="/about">About us</a>
-            
         </div>
         <!-- Use any element to open the sidenav -->
-        <span onclick="openNav()" class="sidenavbutton">
+        <span onclick="openNav()" class="sidenavbutton" style="z-index: 6;">
             <i class="fa fa-bars fa-2x ms-3 mt-3"></i>
         </span>
         <!--Search bar-->
-        <div class="d-flex align-items-center justify-content-center vh-100 flex-column gap-4 mb-5 mt-2 mtcss-1">
-            <form class="d-flex">
-                <input class="form-control me-1 border border-dark" type="search" placeholder="Search" aria-label="Search">
+        <div class="d-flex align-items-center justify-content-center vw-100 flex-column gap-4 mb-5 mt-2 mtcss-1 position-absolute" style="z-index: 5;">
+            <form class="d-flex" method="POST">
+                <input class="form-control me-1 border border-dark" type="search" placeholder="Search" name="search" aria-label="Search">
                 <button class="btn btn-primary" type="submit">Search</button>
             </form>
-
+        </div>
             <!--Right tabs-->
-            <ul class="nav flex-column align-items-end all-right-tabs">
+            <ul class="nav flex-column align-items-end all-right-tabs" style="z-index: 5;">
                 <h4 class="right-tabs-title me-2">Floors</h4>
                 <li class="nav-item">
                     <a
@@ -83,7 +82,7 @@
                 </li>
             </ul>
             <!--tabs for mobile-->
-            <ul class="nav nav-pills  mobile-tabs position-absolute bottom-0 start-50 translate-middle">
+            <ul class="nav nav-pills mobile-tabs position-absolute bottom-0 start-50 translate-middle" style="z-index: 5;">
                 <li class="nav-item d-block d-lg-none">
                     <a
                         class="nav-link bg-dark text-white active-right-tab border rounded"
@@ -108,7 +107,7 @@
                 </script>
                 <script type="module" src="/js/map.js"></script>
             {% else %}
-                <div>
+                <div class="position-absolute top-50 start-50 translate-middle">
                     <h1>Map not found!</h1>
                 </div>
             {% endif %}

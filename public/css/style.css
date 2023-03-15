@@ -80,16 +80,16 @@ border:1px solid #292b2c !important;
 #map {
     background-color:#cecece;
 }
-
-
-.svg-layer path:hover {
-	opacity: 0.4;
-}
 .sidenavbutton{
-    position:absolute;
+    position: absolute;
     cursor: pointer;
-    top:1px;
+    top: 1px;
 }
 .mtcss-1{
     margin-top:15px !important;
+}
+
+.ol-zoom{
+    bottom: 0.5rem;
+    top: unset !important;
 }

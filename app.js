@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 
 app.get('/:building/:floor', (req, res) => {
   if (!req.params.building.match(/^[a-zA-Z]$/)) {
-<<<<<<< HEAD
+
     return res.redirect('/');
   }
 
@@ -36,7 +36,7 @@ app.get('/:building/:floor', (req, res) => {
     return res.redirect('/');
   }
   if (fs.existsSync(`/imgs/maps/${req.params.building}/${req.params.floor}.svg`)) {
-=======
+
     return res.redirect("/");
   }
 
@@ -44,7 +44,7 @@ app.get('/:building/:floor', (req, res) => {
     return res.redirect("/");
   }
   if (fs.existsSync(`public/imgs/maps/${req.params.building}/${req.params.floor}.svg`)) {
->>>>>>> 6a470574474b8b8db4dfdae852f57c29e40b0a20
+
     return res.render('index', { mapUrl: `/imgs/maps/${req.params.building}/${req.params.floor}.svg` });
   }
   return res.render('index');
@@ -53,7 +53,6 @@ app.get('/:building/:floor', (req, res) => {
 app.post('/:building/:floor', (req, res) => {
   if (req.body.search) {
     const search = req.body.search.toUpperCase();
-<<<<<<< HEAD
     const groupIdsUrl = 'https://tahvel.edu.ee/hois_back/timetables/group/14?lang=ET';
     const groupByName = {};
     const roomRegex = /^[a-zA-Z](?!000)[0-9]{3}$/;
@@ -185,7 +184,6 @@ app.post('/:building/:floor', (req, res) => {
     }).on('error', (err) => res.redirect(`?error=${err.message}`));
   } else {
     return res.redirect('?error=' + 'No search property');
-=======
     const groupIdsUrl = "https://tahvel.edu.ee";
     const groupByName = {};
     let roomRegex = /^[a-zA-Z](?!000)[0-9]{3}$/;
@@ -333,10 +331,7 @@ app.post('/:building/:floor', (req, res) => {
       });
     }
   }
-  else {
-    return res.redirect("?error=" + "No search property");
->>>>>>> 6a470574474b8b8db4dfdae852f57c29e40b0a20
-  }
+
 });
 
 app.get('/about', (req, res) => {
@@ -345,8 +340,6 @@ app.get('/about', (req, res) => {
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}/`);
-<<<<<<< HEAD
+
 });
-=======
-})
->>>>>>> 6a470574474b8b8db4dfdae852f57c29e40b0a20
+

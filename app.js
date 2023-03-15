@@ -25,6 +25,9 @@ const port = 3000;
 app.get('/', (req, res) => {
   res.redirect('/A/1');
 });
+app.get('/about', (req, res) => {
+  res.render('aboutus');
+});
 
 app.get('/:building/:floor', (req, res) => {
   if (!req.params.building.match(/^[a-zA-Z]$/)) {

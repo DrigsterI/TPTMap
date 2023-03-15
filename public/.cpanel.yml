@@ -1,0 +1,6 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/huofwwjx/public_html
+    - /bin/cp -r * $DEPLOYPATH
+    - /bin/cp .htaccess $DEPLOYPATH

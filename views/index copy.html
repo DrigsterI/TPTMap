@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 
@@ -14,7 +15,6 @@
     <title>
         Tptmap
     </title>
-
 </head>
 
 <body>
@@ -72,55 +72,52 @@
             </li>
         </div>
     </nav>
-    <!--Right tabs-->
+
 
     {% if mapUrl %}
-    <div id="map" class="map"></div>
-    <script type="text/javascript">
-        window.mapUrl = "{{ mapUrl }}";
-    </script>
-    <script type="module" src="/js/map.js"></script>
+    <!--<div id="map" class="map"></div>-->
 
+    <object data="" type="image/svg+xml" id="map" width="100%" height="100%"></object>
+    <script>
+        var a = document.getElementById("map")
+        url = window.mapUrl = "{{ mapUrl }}"
+        a.setAttribute("data", url)
+    </script>
+<script type="module" src="/js/map.js"></script>-->
     {% else %}
     <div>
         <h1>Map not found!</h1>
     </div>
     {% endif %}
-    <!-- My js -->
     <ul class="nav flex-column align-items-end all-right-tabs">
         <h4 class="right-tabs-title me-2">Floors</h4>
-        <div id="kavabunga" <li class="nav-item">
-            <li>
-                <a class="nav-link bg-dark text-white border rounded right-tabs" id="floor0" onclick="changeFloor(this)"
-                    href="#">0</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link bg-dark text-white border rounded right-tabs" id="floor1" onclick="changeFloor(this)"
-                    href="#">1</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link bg-dark text-white border rounded right-tabs" id="floor2" onclick="changeFloor(this)"
-                    href="#">2</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link bg-dark text-white border rounded right-tabs" id="floor3" onclick="changeFloor(this)"
-                    href="#">3</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link bg-dark text-white border rounded right-tabs" id="floor4" onclick="changeFloor(this)"
-                    href="#">4</a>
-            </li>
-        </div>
+        <li class="nav-item">
+            <a class="nav-link bg-dark text-white active-right-tab border rounded right-tabs"
+                onclick="changeFloor(this)" href="#">0</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeFloor(this)" href="#">1</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeFloor(this)" href="#">2</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeFloor(this)" href="#">3</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeFloor(this)" href="#">4</a>
+        </li>
         <h4 class="right-tabs-title me-2 mt-4 d-none d-lg-block">Building</h4>
         <li class="nav-item d-none d-lg-block">
-            <a class="nav-link bg-dark text-white border rounded" aria-current="page" id="buildingA"
+            <a class="nav-link bg-dark text-white active-right-tab border rounded" aria-current="page" id="BuildingA"
                 onclick="changeBuilding(this)" href="/A/0">A</a>
         </li>
         <li class="nav-item building-tab d-none d-lg-block">
             <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeBuilding(this)"
-                id="buildingB" href="/B/0">B</a>
+                id="BuildingB" href="/B/0">B</a>
         </li>
     </ul>
+    <!-- My js -->
     <script src="/js/script.js"></script>
     <!-- js For Map -->
     <script src="https://cdn.jsdelivr.net/npm/elm-pep@1.0.6/dist/elm-pep.js"></script>
@@ -128,55 +125,50 @@
     <script src="https://kit.fontawesome.com/2d3c6e88d4.js" crossorigin="anonymous"></script>
     <!-- END -->
 </body>
+
+</html>
 <script>
     function changeFloor(floor) {
         Mesto = String(window.location.href)
         klass = Mesto.slice(-3)
-
+        console.log(klass)
         etazh = floor.innerHTML;
-            zdanie = ""
-        floor.classList.add("my-class");
+        zdanie = ""
         BuildingA = document.getElementById("BuildingA")
         BuildingB = document.getElementById("BuildingB")
         zdanie = klass.charAt(0)
         floor.href = "/" + zdanie + "/" + etazh
     }
-
-    window.onload = (event) => {
-        var stily = "fill:rgb(10, 116, 245);stroke:rgb(10, 116, 245); stroke-width:2;fill-opacity:0.7"
-        var Mesto = String(window.location.href)
-        var klass = Mesto.slice(-4)
-
+    document.addEventListener('DOMContentLoaded', function () {
+        stily = "fill:rgb(10, 116, 245);stroke:rgb(10, 116, 245); stroke-width:2;fill-opacity:0.7"
+        Mesto = String(window.location.href)
+        klass = Mesto.slice(-4)
+        if (klass.charAt(0) == "A") {
+            BuildingA = document.getElementById("BuildingA")
+            BuildingA.classList
+        }
         if (klass.charAt(0) == "A" || klass.charAt(0) == "B") {
-            floor = klass.charAt(1)
-            building = klass.charAt(0)
-            activeFloor = document.getElementById("floor"+floor.toString())
-            activeFloor.classList.add("active-right-tab")
-            activeBuilding = document.getElementById("building"+building.toString())
-            activeBuilding.classList.add("active-right-tab")
-            var delta = document.getElementById(klass); // klass
+            console.log(klass)
+            // alert("Document loaded, including graphics and embedded documents (like SVG)");
+            var svg = document.getElementById("map")
+            url = window.mapUrl = "{{ mapUrl }}"
+            console.log(url)
+            svg.setAttribute("data", url)
 
-            delta.style = stily
-            var k = delta.children.length
-            console.log(k)
-            if (k > 0) {
-                for (i = 0; i < k; i++) {
-                    delta.children[i].style = stily
-                }
-            } else {
-                delta.style = stily
-            }
+            console.log(svg)
+            svg.addEventListener("load", function () {
+                var svgDoc = svg.contentDocument
+                var delta = svgDoc.getElementById(klass); // klass
+                array = delta.children.length
+                if (array > 0) {
+                    for (i = 0; i < array; i++) {
+                        delta.children[i].style = stily // stroke-width:3;stroke:rgb(0,0,0)"
+                    }
+                } else { } delta
+                    .style = stily
+            }, false);
 
         }
-        if(klass.charAt(0)=="/"){
-            floor = klass.charAt(3)
-            building = klass.charAt(1)
-            activeFloor = document.getElementById("floor"+floor.toString())
-            activeFloor.classList.add("active-right-tab")
-            activeBuilding = document.getElementById("building"+building.toString())
-            activeBuilding.classList.add("active-right-tab")
-        }
-    };
+    }, false);
+
 </script>
-
-</html>

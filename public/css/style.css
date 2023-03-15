@@ -6,6 +6,7 @@ li{
 }
 .right-tabs:hover{
 border:1px solid #292b2c !important;
+background-color: #015cac !important;
 }
 .right-tabs-title{
     font-family: Arial, Helvetica, sans-serif;
@@ -13,6 +14,7 @@ border:1px solid #292b2c !important;
 .active-right-tab{
     background-color:#0275d8 !important;
     color:white !important;
+    border: 1px solid #292b2c !important;
 }
 .all-right-tabs{
     float: right;
@@ -37,3 +39,20 @@ border:1px solid #292b2c !important;
     }
   }
 */ 
+
+
+/* css for map*/
+
+.map {
+	width: 100%;
+	height: 100vh;
+}
+#map {
+	background: white;
+}
+
+
+.svg-layer rect:hover {
+    fill: blue;
+    fill-opacity: 1;
+}

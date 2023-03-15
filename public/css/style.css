@@ -48,7 +48,7 @@ border:1px solid #292b2c !important;
 #map {
 	background: white;
 }
-
-.svg-layer path:hover {
-	opacity: 0.4;
+.svg-layer rect:hover {
+    fill: blue;
+    fill-opacity: 1;
 }

@@ -28,31 +28,37 @@
         <!--main navbar start-->
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        
             <a href="/">
                 {% if items %}
-                    <a class="nav-link" href="">{{ items.Home }}</a>
+                    <a class="nav-link" href="/">{{ items.Home }}</a>
                 {% else %}                            
-                    <a class="nav-link" href="">Home</a>
+                    <a class="nav-link" href="/">Home</a>
                 {% endif %}
             </a>
             <a href="/about">
                 {% if items %}
-                    <a class="nav-link" href="">{{ items.AboutUs }}</a>
+                    <a class="nav-link" href="/about">{{ items.AboutUs }}</a>
                 {% else %}                            
-                    <a class="nav-link" href="">AboutUs</a>
+                    <a class="nav-link" href="/about">About Us</a>
                 {% endif %}
             </a>
-            
+            <a style="color:white">
+                {% if items %}
+                    <a style="color:white">{{ items.Languages }}</a>
+                {% else %}                            
+                    <a style="color:white" >Languages:</a>
+                {% endif %}
+            </a>
         <ul>
-            <a style="color:white">Languages:</a>
             <li>
-                <a href="/ru">Русский</a>
+                <a href="/ru">• Русский</a>
             </li>
             <li>
-                <a href="/est">Eesti</a>
+                <a href="/est" class="">• Eesti</a>
             </li>
             <li>
-                <a href="/eng">English</a>
+                <a href="/eng">• English</a>
             </li>
         </ul>
             
@@ -75,7 +81,7 @@
                     {% if items %}
                         <a class="nav-link" href="">{{ items.Floors }}</a>
                     {% else %}                            
-                        <a class="nav-link" href="">Floors</a>
+                        <p>Floors</p>
                     {% endif %}
                 </h4>
                 <li class="nav-item">
@@ -101,7 +107,7 @@
                     {% if items %}
                         <a class="nav-link" href="">{{ items.Building }}</a>
                     {% else %}                            
-                        <a class="nav-link" href="">Building</a>
+                        <p>Building</p>
                     {% endif %}
                 </h4>
                 <li class="nav-item d-none d-lg-block">

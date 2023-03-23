@@ -1,182 +1,187 @@
-<!doctype html>
-<html lang="en">
+{% extends "base.html" %}
+{% block head %}
+<link rel="stylesheet" href="/ol/ol.css">
+{% endblock %}
+{% block content %}
+<div id="mySidenav" class="sidenav" style="z-index: 7;">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <!--My css-->
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/ol/ol.css"> <!-- Map Buttons css-->
-    <!--Title-->
-    <title>
-        Tptmap
-    </title>
-
-</head>
-
-<body>
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"> </script>
-    <!--main navbar start-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Download app</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/about">About us</a>
-                    </li>
-                    <form action="" method="POST">
-                        <li class="nav-item search-nav d-none d-lg-block">
-                            <div class="input-group rounded">
-                                <input type="search" name="search" class="form-control rounded"
-                                    placeholder="Search class/group/etc." aria-label="Search"
-                                    aria-describedby="search-addon" />
-                                <button class="input-group-text border-0" id="search-addon" type="submit">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-                        </li>
-                    </form>
-                </ul>
-                <a class="navbar-brand d-none d-lg-block" href="#">Tptmap</a>
-            </div>
-            <li class="nav-item search-nav d-block d-lg-none">
-                <form action="" method="POST">
-                    <div class="input-group rounded">
-                        <input type="search" name="search" class="form-control rounded w-auto"
-                            placeholder="Search class/group/etc." aria-label="Search" aria-describedby="search-addon" />
-                        <button class="input-group-text border-0" id="search-addon" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </form>
-            </li>
-            <li class="nav-item">
-                <a class="navbar-brand d-block d-lg-none align-self-start" href="#">Tptmap</a>
-            </li>
-        </div>
-    </nav>
+    <a href="/">
+        {% if items %}
+            <a class="nav-link" href="/">{{ items.Home }}</a>
+        {% else %}                            
+            <a class="nav-link" href="/">Home</a>
+        {% endif %}
+    </a>
+    <a href="/about">
+        {% if items %}
+            <a class="nav-link" href="/about">{{ items.AboutUs }}</a>
+        {% else %}                            
+            <a class="nav-link" href="/about">About Us</a>
+        {% endif %}
+    </a>
+    <a style="color:white">
+        {% if items %}
+            <a style="color:white">{{ items.Languages }}</a>
+        {% else %}                            
+            <a style="color:white" >Languages:</a>
+        {% endif %}
+    </a>
+<ul>
+    <li>
+        <a href="/ru">• Русский</a>
+    </li>
+    <li>
+        <a href="/est" class="">• Eesti</a>
+    </li>
+    <li>
+        <a href="/eng">• English</a>
+    </li>
+</ul>
+    
+</div>
+<!-- Use any element to open the sidenav -->
+<span onclick="openNav()" class="sidenavbutton" style="z-index: 6;">
+    <i class="fa fa-bars fa-2x ms-3 mt-3"></i>
+</span>
+<img src="https://cdn.discordapp.com/attachments/1085523301473984552/1085531047304896542/school.png" class="position-absolute top-0 end-0" width="100" height="100" alt="...">
+<!--Search bar-->
+<div class="d-flex align-items-center justify-content-center vw-100 flex-column gap-4 mb-5 mt-2 mtcss-1 position-absolute" style="z-index: 5;">
+    <form class="d-flex" method="POST">
+        <input class="form-control me-1 border border-dark" type="search" placeholder="Classroom\Group" aria-label="Search">
+        <button class="btn btn-dark ibat" style="text-align: center, " type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg></button>
+    </form>
+</div>
     <!--Right tabs-->
-
-    {% if mapUrl %}
-    <div id="map" class="map"></div>
-    <script type="text/javascript">
-        window.mapUrl = "{{ mapUrl }}";
-    </script>
-    <script type="module" src="/js/map.js"></script>
-
-    {% else %}
-    <div>
-        <h1>Map not found!</h1>
-    </div>
-    {% endif %}
-    <!-- My js -->
-    <ul class="nav flex-column align-items-end all-right-tabs">
+    <ul class="nav flex-column align-items-end all-right-tabs" style="z-index: 5;">
         <h4 class="right-tabs-title me-2">Floors</h4>
-        <div id="kavabunga" <li class="nav-item">
-            <li>
-                <a class="nav-link bg-dark text-white border rounded right-tabs" id="floor0" onclick="changeFloor(this)"
-                    href="#">0</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link bg-dark text-white border rounded right-tabs" id="floor1" onclick="changeFloor(this)"
-                    href="#">1</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link bg-dark text-white border rounded right-tabs" id="floor2" onclick="changeFloor(this)"
-                    href="#">2</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link bg-dark text-white border rounded right-tabs" id="floor3" onclick="changeFloor(this)"
-                    href="#">3</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link bg-dark text-white border rounded right-tabs" id="floor4" onclick="changeFloor(this)"
-                    href="#">4</a>
-            </li>
-        </div>
-        <h4 class="right-tabs-title me-2 mt-4 d-none d-lg-block">Building</h4>
+        <li class="nav-item">
+            <a
+                class="nav-link bg-dark text-white active-right-tab border rounded right-tabs"
+                id="default_floor"
+                onclick="changeFloor(this)"
+                href="#">0</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeFloor(this)" href="#">1</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeFloor(this)" href="#">2</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeFloor(this)" href="#">3</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeFloor(this)" href="#">4</a>
+        </li>
+        <h4 class="right-tabs-title me-2 mt-4 d-none d-lg-block">
+            {% if items %}
+                <a class="nav-link" href="">{{ items.Building }}</a>
+            {% else %}                            
+                <p>Building</p>
+            {% endif %}
+        </h4>
         <li class="nav-item d-none d-lg-block">
-            <a class="nav-link bg-dark text-white border rounded" aria-current="page" id="buildingA"
-                onclick="changeBuilding(this)" href="/A/0">A</a>
+            <a
+                class="nav-link bg-dark text-white active-right-tab border rounded"
+                aria-current="page"
+                id="BuildingA"
+                onclick="changeBuilding(this)"
+                href="/A/0">A</a>
         </li>
         <li class="nav-item building-tab d-none d-lg-block">
-            <a class="nav-link bg-dark text-white border rounded right-tabs" onclick="changeBuilding(this)"
-                id="buildingB" href="/B/0">B</a>
+            <a
+                class="nav-link bg-dark text-white border rounded right-tabs"
+                onclick="changeBuilding(this)"
+                id="BuildingB"
+                href="/B/0">B</a>
         </li>
     </ul>
+    <!--tabs for mobile-->
+    <ul class="nav nav-pills mobile-tabs position-absolute bottom-0 start-50 translate-middle" style="z-index: 5;">
+        <li class="nav-item d-block d-lg-none">
+            <a
+                class="nav-link bg-dark text-white active-right-tab border rounded"
+                aria-current="page"
+                id="BuildingA"
+                onclick="changeBuilding(this)"
+                href="/A/0">A</a>
+        </li>
+        <li class="nav-item d-block d-lg-none">
+            <a
+                class="nav-link bg-dark text-white border rounded right-tabs"
+                onclick="changeBuilding(this)"
+                id="BuildingB"
+                href="/B/0">B</a>
+        </li>
+    </ul>
+    <!--MAP-->
+    {% if mapUrl %}
+        <div id="map" class="map border border-dark"></div>
+        <script type="text/javascript">
+            window.mapUrl = "{{ mapUrl }}";
+        </script>
+        <script type="module" src="/js/map.js"></script>
+    {% else %}
+        <div class="position-absolute top-50 start-50 translate-middle">
+            <h1>Map not found!</h1>
+        </div>
+    {% endif %}
+{% endblock %}
+{% block script %}
+    <!-- My js -->
     <script src="/js/script.js"></script>
+    <script src="/js/nav.js"></script>
     <!-- js For Map -->
     <script src="https://cdn.jsdelivr.net/npm/elm-pep@1.0.6/dist/elm-pep.js"></script>
+    <script type="module" src="/js/map.js"></script>
     <!--Fontawesome-->
     <script src="https://kit.fontawesome.com/2d3c6e88d4.js" crossorigin="anonymous"></script>
     <!-- END -->
-</body>
-<script>
-    function changeFloor(floor) {
-        Mesto = String(window.location.href)
-        klass = Mesto.slice(-3)
-
-        etazh = floor.innerHTML;
+    <script>
+        function changeFloor(floor) {
+            Mesto = String(window.location.href)
+            klass = Mesto.slice(-3)
+            console.log(klass)
+            etazh = floor.innerHTML;
             zdanie = ""
-        floor.classList.add("my-class");
-        BuildingA = document.getElementById("BuildingA")
-        BuildingB = document.getElementById("BuildingB")
-        zdanie = klass.charAt(0)
-        floor.href = "/" + zdanie + "/" + etazh
-    }
-
-    window.onload = (event) => {
-        var stily = "fill:rgb(10, 116, 245);stroke:rgb(10, 116, 245); stroke-width:2;fill-opacity:0.7"
-        var Mesto = String(window.location.href)
-        var klass = Mesto.slice(-4)
-
-        if (klass.charAt(0) == "A" || klass.charAt(0) == "B") {
-            floor = klass.charAt(1)
-            building = klass.charAt(0)
-            activeFloor = document.getElementById("floor"+floor.toString())
-            activeFloor.classList.add("active-right-tab")
-            activeBuilding = document.getElementById("building"+building.toString())
-            activeBuilding.classList.add("active-right-tab")
-            var delta = document.getElementById(klass); // klass
-
-            delta.style = stily
-            var k = delta.children.length
-            console.log(k)
-            if (k > 0) {
-                for (i = 0; i < k; i++) {
-                    delta.children[i].style = stily
-                }
-            } else {
-                delta.style = stily
+            BuildingA = document.getElementById("BuildingA")
+            BuildingB = document.getElementById("BuildingB")
+            zdanie = klass.charAt(0)
+            floor.href = "/" + zdanie + "/" + etazh
+        }
+        window.onload = (event) => {
+            stily = "fill:rgb(10, 116, 245);stroke:rgb(10, 116, 245); stroke-width:2;fill-opacity:0.7"
+            Mesto = String(window.location.href)
+            klass = Mesto.slice(-4)
+            if (klass.charAt(0) == "A") {
+                BuildingA = document.getElementById("BuildingA")
+                BuildingA.classList
             }
-
-        }
-        if(klass.charAt(0)=="/"){
-            floor = klass.charAt(3)
-            building = klass.charAt(1)
-            activeFloor = document.getElementById("floor"+floor.toString())
-            activeFloor.classList.add("active-right-tab")
-            activeBuilding = document.getElementById("building"+building.toString())
-            activeBuilding.classList.add("active-right-tab")
-        }
-    };
-</script>
-
-</html>
+            if (klass.charAt(0) == "A" || klass.charAt(0) == "B") {
+                console.log(klass)
+                // alert("Document loaded, including graphics and embedded documents (like SVG)");
+                var a = document.getElementById("bitmapsvg");
+                // get the inner DOM of alpha.svg
+                var svgDoc = a.contentDocument;
+                var delta = svgDoc.getElementById(klass); // klass
+                array = delta
+                    .children
+                    .length
+                    if (array > 0) {
+                        for (i = 0; i < array; i ++) {
+                            delta.children[i].style = stily // stroke-width:3;stroke:rgb(0,0,0)"
+                        }
+                    } else {} delta
+                    .style = stily
+                console.log(delta);
+            }
+        };
+    </script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+{% endblock %}

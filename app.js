@@ -47,7 +47,7 @@ app.get('/eng', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.redirect('/A/1');
+  res.redirect('/A/0');
 });
 app.get('/about', (req, res) => {
   res.render('aboutus.html');

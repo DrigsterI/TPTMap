@@ -129,7 +129,7 @@ router.post('/', async (req, res) => {
         return res.redirect('?error=' + 'No next rooms');
       }
     } else {
-      return res.redirect('?error=' + 'Group not found');
+      return res.redirect('?error=' + 'Group or room not found');
     }
   } else {
     return res.redirect('?error=' + 'No search property');

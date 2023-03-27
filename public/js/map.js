@@ -61,7 +61,8 @@ map.addLayer(
   })
 );
 map.once('rendercomplete', function (event) {
-  var stily = "fill:rgb(10, 116, 245);stroke:rgb(10, 116, 245); stroke-width:2;fill-opacity:0.7"
+  setTimeout(() => {
+    var stily = "fill:rgb(10, 116, 245);stroke:rgb(10, 116, 245); stroke-width:2;fill-opacity:0.7"
   var Mesto = String(window.location.href)
   var klass = Mesto.slice(-4)
 
@@ -96,4 +97,6 @@ map.once('rendercomplete', function (event) {
     var activeBuilding = document.getElementById("building" + building.toString())
     activeBuilding.classList.add("active-right-tab")
   }
+  }, "100");
+  
 });

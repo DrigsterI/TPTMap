@@ -50,7 +50,7 @@ router.post('/', async (req, res) => {
       let response = await fetch(timetableUrl)
 
       if (response.headers.get("content-type") != "application/json") {
-        res.redirect('?error=' + 'Server error');
+        return res.redirect('?error=' + 'Server error');
       }
 
       let timetableEvents = await response.json();

@@ -62,7 +62,7 @@ map.addLayer(
 );
 map.once('rendercomplete', function (event) {
   setTimeout(() => {
-    var stily = "fill:rgb(10, 116, 245);stroke:rgb(10, 116, 245); stroke-width:2;fill-opacity:0.7"
+    var stily = "fill:rgb(10, 116, 245);stroke:rgb(10, 116, 245); stroke-width:2;stroke-opacity:1;fill-opacity:0.7"
   var Mesto = String(window.location.href)
   var klass = Mesto.slice(-4)
 

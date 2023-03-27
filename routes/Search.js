@@ -8,7 +8,7 @@ router.post('/', async (req, res) => {
     const search = req.body.search.toUpperCase();
     const groupIdsUrl = 'https://tahvel.edu.ee/hois_back/timetables/group/14?lang=ET';
     const groupByName = {};
-    const roomRegex = /^[a-zA-Z](?!000)[0-9]{3}$/;
+    const roomRegex = /^[a-zA-Z](?!000)[0-9]{3}[a-zA-Z]?$/;
     if (search.match(roomRegex)) {
       return res.redirect(`/${search[0]}/${search[1]}?room=${search}`);
     }

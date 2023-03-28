@@ -32,7 +32,7 @@ xhr.send();
 const width = window.innerWidth;
 const height = window.innerHeight;
 //const svgResolution = 360 / width;
-const svgResolution = 100 / width;
+const svgResolution = 118 / width;
 //svgContainer.style.width = width/2 + 'px';
 svgContainer.style.width = width + 'px';
 svgContainer.style.height = height + 'px';

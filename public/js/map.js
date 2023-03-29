@@ -100,4 +100,3 @@ map.once('rendercomplete', function (event) {
   }, "100");
   
 });
-);

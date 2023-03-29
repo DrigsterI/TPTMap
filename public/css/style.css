@@ -10,6 +10,11 @@ li{
 background-color:#0275d8 !important;
 color:white !important;
 }
+@media (max-width:629px) {
+    img#optionalstuff {
+      display: none;
+    }
+  } 
 .ol-zoom-out{
 height:40px !important;
 width:40px !important;

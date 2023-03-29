@@ -44,7 +44,7 @@
 <span onclick="openNav()" class="sidenavbutton" style="z-index: 6;">
     <i class="fa fa-bars fa-2x ms-3 mt-3"></i>
 </span>
-<img src="https://cdn.discordapp.com/attachments/1085523301473984552/1085531047304896542/school.png" class="position-absolute top-0 end-0" width="100" height="100" alt="...">
+<img id="optionalstuff" src="https://cdn.discordapp.com/attachments/1085523301473984552/1085531047304896542/school.png" class="position-absolute top-0 end-0" width="100" height="100" alt="...">
 <!--Search bar-->
 <div class="d-flex align-items-center justify-content-center vw-100 flex-column gap-4 mb-5 mt-2 mtcss-1 position-absolute" style="z-index: 5;">
     <form class="d-flex" method="POST">
@@ -57,7 +57,7 @@
 </div>
     <!--Right tabs-->
     <ul class="nav flex-column align-items-end all-right-tabs" style="z-index: 5;">
-        <h4 class="right-tabs-title me-2">Floors</h4>
+        <h4 class="right-tabs-title me-2">{{ items.Floors }}</h4>
         <li class="nav-item">
             <a
                 class="nav-link bg-dark text-white border rounded right-tabs"
@@ -78,16 +78,12 @@
             <a class="nav-link bg-dark text-white border rounded right-tabs" id="floor4" onclick="changeFloor(this)" href="#">4</a>
         </li>
         <h4 class="right-tabs-title me-2 mt-4 d-none d-lg-block">
-            {% if items %}
-                <a class="nav-link" href="">{{ items.Building }}</a>
-            {% else %}
-                <p>Building</p>
-            {% endif %}
+            {{ items.Building }}
         </h4>
         <li class="nav-item d-none d-lg-block">
             <a
                 class="nav-link bg-dark text-white border rounded"
-                id="buildingA"
+                id="2buildingA"
                 onclick="changeBuilding(this)"
                 href="#">A</a>
         </li>
@@ -95,7 +91,7 @@
             <a
                 class="nav-link bg-dark text-white border rounded"
                 onclick="changeBuilding(this)"
-                id="buildingB"
+                id="2buildingB"
                 href="#">B</a>
         </li>
     </ul>
@@ -104,16 +100,16 @@
         <li class="nav-item d-block d-lg-none">
             <a
                 class="nav-link bg-dark text-white border rounded"
-                id="buildingA"
+                id="1buildingA"
                 onclick="changeBuilding(this)"
-                href="/A/1">A</a>
+                href="#">A</a>
         </li>
         <li class="nav-item d-block d-lg-none">
             <a
                 class="nav-link bg-dark text-white border rounded"
                 onclick="changeBuilding(this)"
-                id="buildingB"
-                href="/B/1">B</a>
+                id="1buildingB"
+                href="#">B</a>
         </li>
     </ul>
     <!--MAP-->
@@ -121,6 +117,7 @@
         <div id="map" class="map border border-dark"></div>
         <script type="text/javascript">
             window.mapUrl = "{{ mapUrl }}";
+            
         </script>
         <script type="module" src="/js/map.js"></script>
     {% else %}
@@ -138,6 +135,7 @@
     <!--Fontawesome-->
     <script src="https://kit.fontawesome.com/2d3c6e88d4.js" crossorigin="anonymous"></script>
     <!-- END -->
+    
     <script>
         function changeFloor(floor) {
             Mesto = String(window.location.href)
@@ -146,8 +144,6 @@
             etazh = floor.innerHTML;
             zdanie = "";
             floor.classList.add("my-class");
-            BuildingA = document.getElementById("BuildingA")
-            BuildingB = document.getElementById("BuildingB")
             zdanie = klass.charAt(0)
             floor.href = "/" + zdanie + "/" + etazh
         }
@@ -157,7 +153,17 @@
             '<div class="alert alert-warning" role="alert">Group not found</div>'          
             }
         }
-        
+        function changeBuilding(building) {
+            Mesto = String(window.location.href)
+            klass = Mesto.slice(-3)
+    
+            zdanie = building.innerHTML;
+            etazh = "";
+            building.classList.add("my-class");
+            etazh = klass.charAt(2)
+            
+            building.href = "/" + zdanie + "/" + etazh
+        }
     </script>
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

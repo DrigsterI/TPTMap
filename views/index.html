@@ -82,16 +82,16 @@
         <li class="nav-item d-none d-lg-block">
             <a
                 class="nav-link bg-dark text-white border rounded"
-                id="buildingA"
+                id="2buildingA"
                 onclick="changeBuilding(this)"
-                href="/A/1">A</a>
+                href="#">A</a>
         </li>
         <li class="nav-item building-tab d-none d-lg-block">
             <a
                 class="nav-link bg-dark text-white border rounded"
                 onclick="changeBuilding(this)"
-                id="buildingB"
-                href="/B/1">B</a>
+                id="2buildingB"
+                href="#">B</a>
         </li>
     </ul>
     <!--tabs for mobile-->
@@ -99,16 +99,16 @@
         <li class="nav-item d-block d-lg-none">
             <a
                 class="nav-link bg-dark text-white border rounded"
-                id="buildingA"
+                id="1buildingA"
                 onclick="changeBuilding(this)"
-                href="/A/1">A</a>
+                href="#">A</a>
         </li>
         <li class="nav-item d-block d-lg-none">
             <a
                 class="nav-link bg-dark text-white border rounded"
                 onclick="changeBuilding(this)"
-                id="buildingB"
-                href="/B/1">B</a>
+                id="1buildingB"
+                href="#">B</a>
         </li>
     </ul>
     <!--MAP-->
@@ -116,8 +116,9 @@
         <div id="map" class="map border border-dark"></div>
         <script type="text/javascript">
             window.mapUrl = "{{ mapUrl }}";
+            
         </script>
-        
+        <script type="module" src="/js/map.js"></script>
     {% else %}
         <div class="position-absolute top-50 start-50 translate-middle">
             <h1>Map not found!</h1>
@@ -133,7 +134,7 @@
     <!--Fontawesome-->
     <script src="https://kit.fontawesome.com/2d3c6e88d4.js" crossorigin="anonymous"></script>
     <!-- END -->
-    <script type="module" src="/js/map.js"></script>
+    
     <script>
         function changeFloor(floor) {
             Mesto = String(window.location.href)
@@ -142,10 +143,19 @@
             etazh = floor.innerHTML;
             zdanie = "";
             floor.classList.add("my-class");
-            BuildingA = document.getElementById("BuildingA")
-            BuildingB = document.getElementById("BuildingB")
             zdanie = klass.charAt(0)
             floor.href = "/" + zdanie + "/" + etazh
+        }
+        function changeBuilding(building) {
+            Mesto = String(window.location.href)
+            klass = Mesto.slice(-3)
+    
+            zdanie = building.innerHTML;
+            etazh = "";
+            building.classList.add("my-class");
+            etazh = klass.charAt(2)
+            
+            building.href = "/" + zdanie + "/" + etazh
         }
     </script>
     <script

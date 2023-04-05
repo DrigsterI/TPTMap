@@ -64,47 +64,36 @@ map.once("rendercomplete", function (event) {
   setTimeout(() => {
     var stily =
       "fill:rgb(10, 116, 245);stroke:rgb(10, 116, 245); stroke-width:2;stroke-opacity:1;fill-opacity:0.7";
-    var Mesto = String(window.location.href);
-    var klass = Mesto.slice(-4);
-
-    if (klass.charAt(0) == "A" || klass.charAt(0) == "B") {
-      var floor = klass.charAt(1);
-      var building = klass.charAt(0);;
-      var activeFloor = document.getElementById("floor" + floor.toString());
-      activeFloor.classList.add("active-right-tab");
-      var activeBuildingOne = document.getElementById(
-        "1building" + building.toString()
-      );
-      var activeBuildingTwo = document.getElementById(
-        "2building" + building.toString()
-      );
-      activeBuildingOne.classList.add("active-right-tab");
-      activeBuildingTwo.classList.add("active-right-tab");
-      var delta = document.getElementById(klass); // klass
-      delta.style = stily;
-      var k = delta.children.length;
-      console.log(k);
-      if (k > 0) {
-        for (i = 0; i < k; i++) {
-          delta.children[i].style = stily;
-        }
-      } else {
+    var mesto = String(window.location.href);
+    var pathname = String(window.location.pathname)
+    var building = pathname.charAt(1)
+    var floor = pathname.charAt(3)
+    console.log(mesto.indexOf("="));
+    var activeFloor = document.getElementById("floor" + floor.toString());
+    var activeBuildingOne = document.getElementById("1building" + building.toString());
+    var activeBuildingTwo = document.getElementById("2building" + building.toString());
+    activeFloor.classList.add("active-right-tab");
+    activeBuildingOne.classList.add("active-right-tab");
+    activeBuildingTwo.classList.add("active-right-tab");
+    if(mesto.indexOf("=")!='-1'){
+      var room = String(mesto.substring(mesto.indexOf("=") + 1));
+      if (room.length == 5) {
+        room = room.slice(0, -1) + room.charAt(4).toLowerCase();
+      }
+      if (room != null) {
+        
+        var delta = document.getElementById(room); // klass
         delta.style = stily;
+        var k = delta.children.length;
+        if (k > 0) {
+          for (i = 0; i < k; i++) {
+            delta.children[i].style = stily;
+          }
+        } else {
+          delta.style = stily;
+        }
       }
     }
-    if (klass.charAt(0) == "/") {
-      var floor = klass.charAt(3);
-      var building = klass.charAt(1);
-      var activeFloor = document.getElementById("floor" + floor.toString());
-      activeFloor.classList.add("active-right-tab");
-      var activeBuildingOne = document.getElementById(
-        "1building" + building.toString()
-      );
-      var activeBuildingTwo = document.getElementById(
-        "2building" + building.toString()
-      );
-      activeBuildingOne.classList.add("active-right-tab");
-      activeBuildingTwo.classList.add("active-right-tab");
-    }
-  }, "100");
+
+  }, "0");
 });

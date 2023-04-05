@@ -13,9 +13,7 @@ const map = new Map({
   view: new View({
     center: [0, 0],
     projection: "EPSG:4326",
-    zoom: 4.6,
-    minZoom: 4,
-    maxZoom: 6,
+    zoom: 2
   }),
 });
 //<object data="imgs/B0.svg" type="image/svg+xml" id="bitmapsvg" width="100%" height="100%"></object>

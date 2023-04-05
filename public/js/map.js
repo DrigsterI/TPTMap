@@ -1,97 +1,158 @@
-import Layer from "/ol/layer/Layer.js";
-import Map from "/ol/Map.js";
-import View from "/ol/View.js";
-import { composeCssTransform } from "/ol/transform.js";
+class Map {
 
-//let MapName = '0.svg';
-//let MapPath = './imgs/maps/A/' + MapName;
-//let MapPath = '/imgs/maps/A/0.svg';
-//
-let MapPath = window.mapUrl;
-const map = new Map({
-  target: "map",
-  view: new View({
-    center: [0, 0],
-    projection: "EPSG:4326",
-    zoom: 2
-  }),
-});
-//<object data="imgs/B0.svg" type="image/svg+xml" id="bitmapsvg" width="100%" height="100%"></object>
-const svgContainer = document.createElement("div");
-const xhr = new XMLHttpRequest();
-xhr.open("GET", MapPath);
-xhr.addEventListener("load", function () {
-  const svg = xhr.responseXML.documentElement;
-  svgContainer.ownerDocument.importNode(svg);
-  svgContainer.appendChild(svg);
-});
-xhr.send();
+    zoom = 1;
+    width;
+    height;
 
-const width = window.innerWidth;
-const height = window.innerHeight;
-//const svgResolution = 360 / width;
-const svgResolution = 118 / width;
-//svgContainer.style.width = width/2 + 'px';
-svgContainer.style.width = width + "px";
-svgContainer.style.height = height + "px";
-//svgContainer.style.transformOrigin = 'top left';
-svgContainer.className = "svg-layer";
+    lastMouseX;
+    lastMouseY;
 
-map.addLayer(
-  new Layer({
-    render: function (frameState) {
-      const scale = svgResolution / frameState.viewState.resolution;
-      const center = frameState.viewState.center;
-      const size = frameState.size;
-      const cssTransform = composeCssTransform(
-        0, // start x
-        -100, // start y
-        scale, // for zooming (from frameState)
-        scale, //
-        frameState.viewState.rotation, // rotation
-        -center[0] / svgResolution, // move left (-)
-        center[1] / svgResolution //move up (-)
-      );
-      svgContainer.style.transform = cssTransform;
-      svgContainer.style.opacity = this.getOpacity();
-      return svgContainer;
-    },
-  })
-);
-map.once("rendercomplete", function (event) {
-  setTimeout(() => {
-    var stily =
-      "fill:rgb(10, 116, 245);stroke:rgb(10, 116, 245); stroke-width:2;stroke-opacity:1;fill-opacity:0.7";
-    var mesto = String(window.location.href);
-    var pathname = String(window.location.pathname)
-    var building = pathname.charAt(1)
-    var floor = pathname.charAt(3)
-    console.log(mesto.indexOf("="));
-    var activeFloor = document.getElementById("floor" + floor.toString());
-    var activeBuildingOne = document.getElementById("1building" + building.toString());
-    var activeBuildingTwo = document.getElementById("2building" + building.toString());
-    activeFloor.classList.add("active-right-tab");
-    activeBuildingOne.classList.add("active-right-tab");
-    activeBuildingTwo.classList.add("active-right-tab");
-    if(mesto.indexOf("=")!='-1'){
-      var room = String(mesto.substring(mesto.indexOf("=") + 1));
-      if (room.length == 5) {
-        room = room.slice(0, -1) + room.charAt(4).toLowerCase();
-      }
-      if (room != null) {
-        
-        var delta = document.getElementById(room); // klass
-        delta.style = stily;
-        var k = delta.children.length;
-        if (k > 0) {
-          for (i = 0; i < k; i++) {
-            delta.children[i].style = stily;
-          }
-        } else {
-          delta.style = stily;
-        }
-      }
+    posX = 0;
+    posY = 0;
+
+    map;
+    svg;
+    image;
+
+    callback;
+
+    constructor(id, zoom, posX, posY, callback) {
+        this.id = id;
+        this.zoom = zoom;
+        this.posX = posX;
+        this.posY = posY;
+        this.callback = callback;
+
+        this.main();
     }
 
-  }, "0");
-});
+    main() {
+        this.map = document.getElementById(this.id);
+        this.map.style.overflow = "hidden";
+        this.map.setAttribute("draggable", "false");
+
+        this.width = this.map.clientWidth;
+        this.height = this.map.clientHeight;
+
+        const svgNS = "http://www.w3.org/2000/svg";
+        this.svg = document.createElementNS(svgNS, "svg");
+        this.image = document.createElementNS(svgNS, "image");
+        this.svg.setAttributeNS(null, "draggable", "false");
+        this.svg.setAttributeNS(null, "ondragstart", "return false;");
+        this.svg.style.MozUserSelect = "none";
+
+        this.image.setAttributeNS("http://www.w3.org/1999/xlink", "href", mapUrl);
+
+        this.svg.style.position = "relative";
+        this.svg.appendChild(this.image);
+        this.map.appendChild(this.svg);
+
+        const buttonsDiv = document.createElement("div");
+        buttonsDiv.className = "position-absolute bottom-0 start-0"
+
+        const zoomInButton = document.createElement("button");
+        zoomInButton.innerHTML = "+";
+        zoomInButton.className = "nav-link bg-dark text-white border rounded";
+        zoomInButton.onclick = this.zoomIn;
+
+        const zoomOutButton = document.createElement("button");
+        zoomOutButton.innerHTML = "–";
+        zoomOutButton.className = "nav-link bg-dark text-white border rounded";
+        zoomOutButton.onclick = this.zoomOut;
+
+        buttonsDiv.appendChild(zoomInButton);
+        buttonsDiv.appendChild(zoomOutButton);
+        this.map.appendChild(buttonsDiv);
+
+        this.moveFunc = this.move.bind(this);
+
+        this.map.addEventListener("mousedown", () => {
+            this.map.addEventListener("mousemove", this.moveFunc);
+        });
+
+        this.map.addEventListener("mouseup", () => {
+            this.map.removeEventListener("mousemove", this.moveFunc);
+            this.lastMouseX = undefined;
+            this.lastMouseY = undefined;
+        });
+
+        this.map.addEventListener("mouseleave", () => {
+            this.map.removeEventListener("mousemove", this.moveFunc);
+            this.lastMouseX = undefined;
+            this.lastMouseY = undefined;
+        });
+
+        addEventListener("drag", (event) => {
+            event.preventDefault();
+        });
+
+        addEventListener("wheel", (event) => {
+            if (event.wheelDelta > 0) {
+                this.zoomIn()
+            }
+            else if (event.wheelDelta < 0) {
+                this.zoomOut()
+            }
+        });
+
+        document.body.onload = () => {
+            let bbox = this.svg.getBBox();
+            console.log(bbox);
+            this.width = bbox.width * (window.innerHeight / bbox.height);
+            this.height = bbox.height * (window.innerHeight / bbox.height);
+            this.svg.setAttributeNS(null, "width", this.width);
+            this.svg.setAttributeNS(null, "height", this.height);
+            this.image.setAttributeNS(null, "width", this.width);
+            this.image.setAttributeNS(null, "height", this.height);
+            this.svg.style.left = (window.innerWidth - this.width) / 2 + "px";
+            this.svg.style.top = (window.innerHeight - this.height) / 2 + "px";
+            this.callback();
+        }
+    }
+
+    updateSvgSize() {
+        let deltaX = this.svg.getAttributeNS(null, "width") - Math.floor(this.width * this.zoom);
+        let deltaY = this.svg.getAttributeNS(null, "height") - Math.floor(this.height * this.zoom);
+
+        this.posX = this.posX + deltaX / 2;
+        this.svg.style.left = this.posX + "px";
+        this.posY = this.posY + deltaY / 2;
+        this.svg.style.top = this.posY + "px";
+
+        this.svg.setAttributeNS(null, "width", Math.floor(this.width * this.zoom));
+        this.svg.setAttributeNS(null, "height", Math.floor(this.height * this.zoom));
+        this.image.setAttributeNS(null, "width", Math.floor(this.width * this.zoom));
+        this.image.setAttributeNS(null, "height", Math.floor(this.height * this.zoom));
+    }
+
+    zoomIn() {
+        this.zoom += 0.1;
+        this.updateSvgSize();
+    }
+
+    zoomOut() {
+        this.zoom -= 0.1;
+        this.updateSvgSize();
+    }
+
+    move(event) {
+        let x = event.clientX;
+        let y = event.clientY;
+        if (this.lastMouseX == undefined) {
+            this.lastMouseX = x;
+            this.lastMouseY = y;
+            return;
+        }
+        let deltaX = this.lastMouseX - x;
+        let deltaY = this.lastMouseY - y;
+        this.lastMouseX = x;
+        this.lastMouseY = y;
+
+        this.posX = this.posX - deltaX;
+        this.svg.style.left = this.posX + "px";
+        this.posY = this.posY - deltaY;
+        this.svg.style.top = this.posY + "px";
+    }
+}
+
+export default Map;

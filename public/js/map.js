@@ -93,5 +93,5 @@ map.once("rendercomplete", function (event) {
       }
     }
 
-  }, "0");
+  }, 200);
 });

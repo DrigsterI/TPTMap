@@ -62,7 +62,7 @@ class Map {
 
         buttonsDiv.appendChild(zoomInButton);
         buttonsDiv.appendChild(zoomOutButton);
-        this.map.appendChild(buttonsDiv);
+        document.body.appendChild(buttonsDiv);
 
         this.map.addEventListener("mousedown", () => {
             this.isMapMoved = true;
@@ -76,7 +76,27 @@ class Map {
             this.isMapMoved = false;
         });
 
-        this.map.addEventListener("mousemove", this.move.bind(this));
+        this.map.addEventListener("touchstart", (event) => {
+            event.preventDefault();
+            if (event.touches.length == 1) {
+                this.isMapMoved = true;
+            }
+        });
+
+        this.map.addEventListener("touchend", () => {
+            this.isMapMoved = false;
+            this.lastMouseX = undefined;
+            this.lastMouseY = undefined;
+        });
+
+        this.map.addEventListener("ontouchcancel", () => {
+            this.isMapMoved = false;
+            this.lastMouseX = undefined;
+            this.lastMouseY = undefined;
+        });
+
+        this.map.addEventListener("mousemove", this.mouseMove.bind(this));
+        this.map.addEventListener("touchmove", this.touchMove.bind(this));
 
         addEventListener("drag", (event) => {
             event.preventDefault();
@@ -100,6 +120,8 @@ class Map {
             this.svg.setAttributeNS(null, "width", this.width);
             this.svg.setAttributeNS(null, "height", this.height);
             this.updateSvgSize();
+            this.lastMouseX = undefined;
+            this.lastMouseY = undefined;
             this.callback();
         }
     }
@@ -143,9 +165,32 @@ class Map {
         this.updateSvgSize(zoomToCenter);
     }
 
-    move(event) {
+    mouseMove(event) {
         let x = event.clientX;
         let y = event.clientY;
+        if (this.lastMouseX == undefined) {
+            this.lastMouseX = x;
+            this.lastMouseY = y;
+            return;
+        }
+        let deltaX = this.lastMouseX - x;
+        let deltaY = this.lastMouseY - y;
+        this.lastMouseX = x;
+        this.lastMouseY = y;
+        if (this.isMapMoved) {
+            this.posX = this.posX - deltaX;
+            this.svg.style.left = this.posX + "px";
+            this.posY = this.posY - deltaY;
+            this.svg.style.top = this.posY + "px";
+        }
+    }
+
+    touchMove(event) {
+        if (event.touches.length > 1) {
+            return;
+        }
+        let x = event.touches[0].pageX;
+        let y = event.touches[0].pageY;
         if (this.lastMouseX == undefined) {
             this.lastMouseX = x;
             this.lastMouseY = y;

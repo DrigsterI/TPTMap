@@ -13,6 +13,9 @@ class Map {
     svg;
     image;
 
+    scaling = false;
+    pinchStartDistance;
+
     callback;
     isMapMoved = false;
 
@@ -77,26 +80,58 @@ class Map {
         });
 
         this.map.addEventListener("touchstart", (event) => {
-            event.preventDefault();
             if (event.touches.length == 1) {
                 this.isMapMoved = true;
+                this.lastMouseX = undefined;
+                this.lastMouseY = undefined;
             }
+            else if (event.touches.length == 2) {
+                this.scaling = true;
+            }
+            event.preventDefault();
         });
 
         this.map.addEventListener("touchend", () => {
             this.isMapMoved = false;
+            this.scaling = false;
+            this.pinchStartDistance = undefined;
             this.lastMouseX = undefined;
             this.lastMouseY = undefined;
         });
 
         this.map.addEventListener("ontouchcancel", () => {
             this.isMapMoved = false;
+            this.scaling = false;
+            this.pinchStartDistance = undefined;
             this.lastMouseX = undefined;
             this.lastMouseY = undefined;
         });
 
         this.map.addEventListener("mousemove", this.mouseMove.bind(this));
-        this.map.addEventListener("touchmove", this.touchMove.bind(this));
+        this.map.addEventListener("touchmove", (event) => {
+            if (event.touches.length == 1) {
+                console.log(event.touches);
+                this.touchMove(event);
+            }
+            else if (event.touches.length == 2) {
+                let distance = Math.hypot(
+                    event.touches[0].pageX - event.touches[1].pageX,
+                    event.touches[0].pageY - event.touches[1].pageY
+                );
+                if (this.pinchStartDistance == undefined) {
+                    this.pinchStartDistance = distance;
+                    return;
+                }
+                if ((this.pinchStartDistance - distance) > 25) {
+                    this.pinchStartDistance = distance;
+                    this.zoomOut(true);
+                }
+                else if ((this.pinchStartDistance - distance) < -25) {
+                    this.pinchStartDistance = distance;
+                    this.zoomIn(true);
+                }
+            }
+        });
 
         addEventListener("drag", (event) => {
             event.preventDefault();
@@ -120,8 +155,6 @@ class Map {
             this.svg.setAttributeNS(null, "width", this.width);
             this.svg.setAttributeNS(null, "height", this.height);
             this.updateSvgSize();
-            this.lastMouseX = undefined;
-            this.lastMouseY = undefined;
             this.callback();
         }
     }
@@ -186,6 +219,8 @@ class Map {
     }
 
     touchMove(event) {
+        console.log("move");
+        console.log(this.lastMouseX == undefined);
         if (event.touches.length > 1) {
             return;
         }

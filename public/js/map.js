@@ -1,5 +1,4 @@
 class Map {
-
     zoom = 1;
     width;
     height;
@@ -15,6 +14,7 @@ class Map {
     image;
 
     callback;
+    isMapMoved = false;
 
     constructor(id, zoom, posX, posY, callback) {
         this.id = id;
@@ -53,34 +53,30 @@ class Map {
         const zoomInButton = document.createElement("button");
         zoomInButton.innerHTML = "+";
         zoomInButton.className = "nav-link bg-dark text-white border rounded";
-        zoomInButton.onclick = this.zoomIn;
+        zoomInButton.onclick = this.zoomIn.bind(this, true);
 
         const zoomOutButton = document.createElement("button");
         zoomOutButton.innerHTML = "–";
         zoomOutButton.className = "nav-link bg-dark text-white border rounded";
-        zoomOutButton.onclick = this.zoomOut;
+        zoomOutButton.onclick = this.zoomOut.bind(this, true);
 
         buttonsDiv.appendChild(zoomInButton);
         buttonsDiv.appendChild(zoomOutButton);
         this.map.appendChild(buttonsDiv);
 
-        this.moveFunc = this.move.bind(this);
-
         this.map.addEventListener("mousedown", () => {
-            this.map.addEventListener("mousemove", this.moveFunc);
+            this.isMapMoved = true;
         });
 
         this.map.addEventListener("mouseup", () => {
-            this.map.removeEventListener("mousemove", this.moveFunc);
-            this.lastMouseX = undefined;
-            this.lastMouseY = undefined;
+            this.isMapMoved = false;
         });
 
         this.map.addEventListener("mouseleave", () => {
-            this.map.removeEventListener("mousemove", this.moveFunc);
-            this.lastMouseX = undefined;
-            this.lastMouseY = undefined;
+            this.isMapMoved = false;
         });
+
+        this.map.addEventListener("mousemove", this.move.bind(this));
 
         addEventListener("drag", (event) => {
             event.preventDefault();
@@ -97,26 +93,38 @@ class Map {
 
         document.body.onload = () => {
             let bbox = this.svg.getBBox();
-            console.log(bbox);
-            this.width = bbox.width * (window.innerHeight / bbox.height);
-            this.height = bbox.height * (window.innerHeight / bbox.height);
+            this.width = (bbox.width * (window.innerWidth / bbox.width));
+            this.height = (bbox.height * (window.innerHeight / bbox.height))
+            this.lastMouseX = window.innerWidth / 2;
+            this.lastMouseY = window.innerHeight / 2;
             this.svg.setAttributeNS(null, "width", this.width);
             this.svg.setAttributeNS(null, "height", this.height);
-            this.image.setAttributeNS(null, "width", this.width);
-            this.image.setAttributeNS(null, "height", this.height);
-            this.svg.style.left = (window.innerWidth - this.width) / 2 + "px";
-            this.svg.style.top = (window.innerHeight - this.height) / 2 + "px";
+            this.updateSvgSize();
             this.callback();
         }
     }
 
-    updateSvgSize() {
+    updateSvgSize(zoomToCenter = false) {
         let deltaX = this.svg.getAttributeNS(null, "width") - Math.floor(this.width * this.zoom);
         let deltaY = this.svg.getAttributeNS(null, "height") - Math.floor(this.height * this.zoom);
 
-        this.posX = this.posX + deltaX / 2;
+        let mouseDeltaX;
+        let mouseDeltaY;
+        if (!zoomToCenter) {
+            // delta relative to mouse position
+            // delta multiplied on percentage of mouse position to size of the map
+            // mouse position = left/up - 0, center - 0.5, right/bottom - 1
+            mouseDeltaX = deltaX * ((((this.lastMouseX - this.posX) * 100) / this.svg.getAttributeNS(null, "width")) / 100);
+            mouseDeltaY = deltaY * ((((this.lastMouseY - this.posY) * 100) / this.svg.getAttributeNS(null, "height")) / 100);
+        }
+        else {
+            mouseDeltaX = deltaX * 0.5;
+            mouseDeltaY = deltaY * 0.5;
+        }
+
+        this.posX = this.posX + mouseDeltaX;
         this.svg.style.left = this.posX + "px";
-        this.posY = this.posY + deltaY / 2;
+        this.posY = this.posY + mouseDeltaY;
         this.svg.style.top = this.posY + "px";
 
         this.svg.setAttributeNS(null, "width", Math.floor(this.width * this.zoom));
@@ -125,14 +133,14 @@ class Map {
         this.image.setAttributeNS(null, "height", Math.floor(this.height * this.zoom));
     }
 
-    zoomIn() {
+    zoomIn(zoomToCenter = false) {
         this.zoom += 0.1;
-        this.updateSvgSize();
+        this.updateSvgSize(zoomToCenter);
     }
 
-    zoomOut() {
+    zoomOut(zoomToCenter = false) {
         this.zoom -= 0.1;
-        this.updateSvgSize();
+        this.updateSvgSize(zoomToCenter);
     }
 
     move(event) {
@@ -147,11 +155,12 @@ class Map {
         let deltaY = this.lastMouseY - y;
         this.lastMouseX = x;
         this.lastMouseY = y;
-
-        this.posX = this.posX - deltaX;
-        this.svg.style.left = this.posX + "px";
-        this.posY = this.posY - deltaY;
-        this.svg.style.top = this.posY + "px";
+        if (this.isMapMoved) {
+            this.posX = this.posX - deltaX;
+            this.svg.style.left = this.posX + "px";
+            this.posY = this.posY - deltaY;
+            this.svg.style.top = this.posY + "px";
+        }
     }
 }
 

@@ -147,13 +147,22 @@ class Map {
         });
 
         document.body.onload = () => {
+            // getting svg size
             let bbox = this.svg.getBBox();
-            this.width = (bbox.width * (window.innerWidth / bbox.width));
-            this.height = (bbox.height * (window.innerHeight / bbox.height))
+            // multiplying svg size to percentage of svg size to window height
+            // making svg be 100 of height of the window
+            this.width = bbox.width * (((window.innerHeight * 100) / bbox.height) / 100);
+            this.height = bbox.height * (((window.innerHeight * 100) / bbox.height) / 100);
             this.lastMouseX = window.innerWidth / 2;
             this.lastMouseY = window.innerHeight / 2;
             this.svg.setAttributeNS(null, "width", this.width);
             this.svg.setAttributeNS(null, "height", this.height);
+            this.image.setAttributeNS(null, "width", this.width);
+            this.image.setAttributeNS(null, "height", this.height);
+            this.posX = (window.innerWidth - this.width) / 2;
+            this.svg.style.left = this.posX + "px";
+            this.posY = (window.innerHeight - this.height) / 2;
+            this.svg.style.top = this.posY + "px";
             this.updateSvgSize();
             this.callback();
         }

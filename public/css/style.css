@@ -57,7 +57,8 @@ background-color: #015cac !important;
     float: right;
     position: fixed;
     right: 0px; 
-    top:300px;
+    top: 50%;
+    transform: translate(0, -50%);
 }
 .responsive_img {
     width: 100%;

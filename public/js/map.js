@@ -11,7 +11,6 @@ class Map {
 
     map;
     svg;
-    image;
 
     scaling = false;
     pinchStartDistance;
@@ -29,7 +28,7 @@ class Map {
         this.main();
     }
 
-    main() {
+    async main() {
         this.map = document.getElementById(this.id);
         this.map.style.overflow = "hidden";
         this.map.setAttribute("draggable", "false");
@@ -43,11 +42,14 @@ class Map {
         this.svg.setAttributeNS(null, "draggable", "false");
         this.svg.setAttributeNS(null, "ondragstart", "return false;");
         this.svg.style.MozUserSelect = "none";
-
-        this.image.setAttributeNS("http://www.w3.org/1999/xlink", "href", mapUrl);
-
         this.svg.style.position = "relative";
-        this.svg.appendChild(this.image);
+
+        let svgHTML = await (await fetch(mapUrl)).text();
+        let tempSvgElement = document.createElement("svg");
+        tempSvgElement.innerHTML = svgHTML;
+        svgHTML = tempSvgElement.getElementsByTagName('svg')[0].innerHTML;
+
+        this.svg.innerHTML = svgHTML;
         this.map.appendChild(this.svg);
 
         const buttonsDiv = document.createElement("div");
@@ -66,6 +68,28 @@ class Map {
         buttonsDiv.appendChild(zoomInButton);
         buttonsDiv.appendChild(zoomOutButton);
         document.body.appendChild(buttonsDiv);
+
+        // getting svg size
+        let bbox = this.svg.getBBox();
+        // multiplying svg size to percentage of svg size to window height
+        // making svg be 100 of height of the window
+        this.width = bbox.width * (((window.innerHeight * 100) / bbox.height) / 100);
+        this.height = bbox.height * (((window.innerHeight * 100) / bbox.height) / 100);
+        this.lastMouseX = window.innerWidth / 2;
+        this.lastMouseY = window.innerHeight / 2;
+        
+        this.svg.setAttributeNS(null, "viewBox", `${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`);
+
+        this.svg.setAttributeNS(null, "width", this.width);
+        this.svg.setAttributeNS(null, "height", this.height);
+        this.posX = (window.innerWidth - this.width) / 2;
+        this.svg.style.left = this.posX + "px";
+        this.posY = (window.innerHeight - this.height) / 2;
+        this.svg.style.top = this.posY + "px";
+
+        this.updateSvgSize();
+
+        this.callback();
 
         this.map.addEventListener("mousedown", () => {
             this.isMapMoved = true;
@@ -110,7 +134,6 @@ class Map {
         this.map.addEventListener("mousemove", this.mouseMove.bind(this));
         this.map.addEventListener("touchmove", (event) => {
             if (event.touches.length == 1) {
-                console.log(event.touches);
                 this.touchMove(event);
             }
             else if (event.touches.length == 2) {
@@ -145,29 +168,8 @@ class Map {
                 this.zoomOut()
             }
         });
-
-        document.body.onload = () => {
-            // getting svg size
-            let bbox = this.svg.getBBox();
-            // multiplying svg size to percentage of svg size to window height
-            // making svg be 100 of height of the window
-            this.width = bbox.width * (((window.innerHeight * 100) / bbox.height) / 100);
-            this.height = bbox.height * (((window.innerHeight * 100) / bbox.height) / 100);
-            this.lastMouseX = window.innerWidth / 2;
-            this.lastMouseY = window.innerHeight / 2;
-            this.svg.setAttributeNS(null, "width", this.width);
-            this.svg.setAttributeNS(null, "height", this.height);
-            this.image.setAttributeNS(null, "width", this.width);
-            this.image.setAttributeNS(null, "height", this.height);
-            this.posX = (window.innerWidth - this.width) / 2;
-            this.svg.style.left = this.posX + "px";
-            this.posY = (window.innerHeight - this.height) / 2;
-            this.svg.style.top = this.posY + "px";
-            this.updateSvgSize();
-            this.callback();
-        }
     }
-
+    
     updateSvgSize(zoomToCenter = false) {
         let deltaX = this.svg.getAttributeNS(null, "width") - Math.floor(this.width * this.zoom);
         let deltaY = this.svg.getAttributeNS(null, "height") - Math.floor(this.height * this.zoom);
@@ -193,8 +195,6 @@ class Map {
 
         this.svg.setAttributeNS(null, "width", Math.floor(this.width * this.zoom));
         this.svg.setAttributeNS(null, "height", Math.floor(this.height * this.zoom));
-        this.image.setAttributeNS(null, "width", Math.floor(this.width * this.zoom));
-        this.image.setAttributeNS(null, "height", Math.floor(this.height * this.zoom));
     }
 
     zoomIn(zoomToCenter = false) {
@@ -228,8 +228,6 @@ class Map {
     }
 
     touchMove(event) {
-        console.log("move");
-        console.log(this.lastMouseX == undefined);
         if (event.touches.length > 1) {
             return;
         }

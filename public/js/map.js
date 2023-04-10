@@ -9,6 +9,9 @@ class Map {
     posX = 0;
     posY = 0;
 
+    zoomMax = 2.5;
+    zoomMin = 0.2;
+
     map;
     svg;
 
@@ -198,12 +201,19 @@ class Map {
     }
 
     zoomIn(zoomToCenter = false) {
-        this.zoom += 0.1;
+        if(this.zoom >= this.zoomMax){
+            return;
+        }
+        this.zoom = (parseFloat(this.zoom) + 0.1).toPrecision(5);
         this.updateSvgSize(zoomToCenter);
     }
 
     zoomOut(zoomToCenter = false) {
-        this.zoom -= 0.1;
+        
+        if(this.zoom <= this.zoomMin){
+            return;
+        }
+        this.zoom = (parseFloat(this.zoom) - 0.1).toPrecision(5);
         this.updateSvgSize(zoomToCenter);
     }
 

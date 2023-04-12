@@ -24,7 +24,7 @@ Frontend:
 
 - Aleksander Shanchuk Github: [NogutiCode](https://github.com/NogutiCode)
 
-- Denis Lesnikov Github: [Iteey]((https://github.com/Iteey)
+- Denis Lesnikov Github: [Iteey](https://github.com/Iteey)
 
 
 

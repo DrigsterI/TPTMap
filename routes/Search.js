@@ -38,10 +38,12 @@ router.post('/', async (req, res) => {
     });
     if (groupByName[searchedGroupId]) {
       const date = new Date();
-      date.setHours(0, 0, 0, 0);
+      date.setHours(0 - date.getTimezoneOffset() / 60, 0, 0, 0);
 
       const dateToday = date.toISOString();
       date.setDate(date.getDate() + 7);
+
+      console.log(dateToday);
 
       const dateInWeek = date.toISOString();
 

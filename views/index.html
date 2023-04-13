@@ -42,9 +42,13 @@
 </div>
 <!-- Use any element to open the sidenav -->
 <span onclick="openNav()" class="sidenavbutton" style="z-index: 6;">
-    <i class="fa fa-bars fa-2x ms-3 mt-3"></i>
+    <i>
+      <svg xmlns="http://www.w3.org/2000/svg" width="36px" height="36px" fill="currentColor" class="bi bi-list mymt-1" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+      </svg>
+    </i>
 </span>
-<img id="optionalstuff" src="https://cdn.discordapp.com/attachments/1085523301473984552/1085531047304896542/school.png" class="position-absolute top-0 end-0" width="100" height="100" alt="...">
+<img id="optionalstuff" src="/imgs/school.png" class="position-absolute top-0 end-0" width="100" height="100" alt="...">
 <!--Search bar-->
 <div class="d-flex align-items-center justify-content-center vw-100 flex-column gap-4 mb-5 mt-2 mtcss-1 position-absolute" style="z-index: 5;">
     <form class="d-flex" method="POST">
@@ -168,38 +172,8 @@
     <!-- js For Map -->
     <script src="https://cdn.jsdelivr.net/npm/elm-pep@1.0.6/dist/elm-pep.js"></script>
     <!--Fontawesome-->
-    <script src="https://kit.fontawesome.com/2d3c6e88d4.js" crossorigin="anonymous"></script>
+    
     <!-- END -->
-    
-    <script>
-        function changeFloor(floor) {
-            Mesto = String(window.location.href)
-            klass = Mesto.slice(-3)
-    
-            etazh = floor.innerHTML;
-            zdanie = "";
-            floor.classList.add("my-class");
-            zdanie = klass.charAt(0)
-            floor.href = "/" + zdanie + "/" + etazh
-        }
-        window.onload = (event) => {
-            if (window.location.href.indexOf("error") > -1) {
-            document.getElementById("errorGP").innerHTML = 
-            '<div class="alert alert-warning" role="alert">Group not found</div>'          
-            }
-        }
-        function changeBuilding(building) {
-            Mesto = String(window.location.href)
-            klass = Mesto.slice(-3)
-    
-            zdanie = building.innerHTML;
-            etazh = "";
-            building.classList.add("my-class");
-            etazh = klass.charAt(2)
-            
-            building.href = "/" + zdanie + "/" + etazh
-        }
-    </script>
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

@@ -34,8 +34,8 @@
    borderopacity="1"
    id="namedview6000"
    inkscape:current-layer="layer1"
-   inkscape:cx="145.09375"
-   inkscape:cy="341.99999"
+   inkscape:cx="38.360542"
+   inkscape:cy="335.34538"
    inkscape:deskcolor="#505050"
    inkscape:document-units="mm"
    inkscape:pagecheckerboard="1"
@@ -46,7 +46,7 @@
    inkscape:window-width="1920"
    inkscape:window-x="-9"
    inkscape:window-y="-9"
-   inkscape:zoom="16"
+   inkscape:zoom="2.8284272"
    pagecolor="#ffffff"
    showgrid="false">
 	</sodipodi:namedview>
@@ -304,13 +304,7 @@
    class="st4"
    d="M116.7,299.3c13.4,0,24.2,8.9,24.2,21.7c0,2.2,0,5.7,0,5.7l0.3,7.9l-0.7,11c0,0-9.5-0.1-13.3,0.2   c-4.4,0.4-8.9-0.3-10.5-0.3c-13.4,0-24.2-10.3-24.2-23.1S103.3,299.3,116.7,299.3z" />
 	
-		<path
-   id="A007"
-   inkscape:original-d="m 46.538305,82.225469 12.581713,-1.169305 0.561268,9.027031 h -4.490128 v 16.323485 l -3.695002,-1.91766 -0.233135,-0.55738 -4.150651,1.10794 -4.034896,-1.42213 V 92.538021 h 4.316016 v -0.926042 z"
-   inkscape:path-effect="#path-effect2643"
-   class="st2"
-   d="   M131.9,233.1l35.7-3.3"
-   inkscape:label="0000A007" />
+		
 	<rect
    id="A009"
    x="603"

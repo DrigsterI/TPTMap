@@ -1,5 +1,6 @@
 const express = require('express')
 const fetch = require('node-fetch')
+const { DateTime } = require('luxon')
 
 const router = express.Router()
 
@@ -37,15 +38,11 @@ router.post('/', async (req, res) => {
       }
     });
     if (groupByName[searchedGroupId]) {
-      const date = new Date();
-      date.setHours(0 - date.getTimezoneOffset() / 60, 0, 0, 0);
+      const date = DateTime.now().setZone('Europe/Tallinn');
 
-      const dateToday = date.toISOString();
-      date.setDate(date.getDate() + 7);
+      const dateToday = date.startOf('day').toFormat("yyyy-LL-dd'T'HH:mm:ss.SSS'Z'");
 
-      console.log(dateToday);
-
-      const dateInWeek = date.toISOString();
+      const dateInWeek = date.plus({weeks: 1}).endOf('day').toFormat("yyyy-LL-dd'T'HH:mm:ss.SSS'Z'");
 
       const timetableUrl = `https://tahvel.edu.ee/hois_back/timetableevents/timetableByGroup/14?from=${dateToday}&studentGroups=${groupByName[searchedGroupId]}&thru=${dateInWeek}`;
 
@@ -115,11 +112,11 @@ router.post('/', async (req, res) => {
         const minutes = parseInt(timeParts[1], 10);
 
         const timeIndex = Object.keys(dayData).indexOf(time);
-        if (date.getHours() === hours && Math.abs(date.getMinutes() - minutes) <= 15) {
+        if (date.get("hour") === hours && Math.abs(date.get("minute") - minutes) <= 15) {
           nextRoom = dayData[time][0];
           return res.redirect(`/${nextRoom[0]}/${nextRoom[1]}?room=${nextRoom}`);
         }
-        if (date.getHours() < hours && date.getMinutes() === minutes) {
+        if (date.get("hour") < hours && date.get("minute") === minutes) {
           if (timeIndex < Object.keys(dayData).length - 1) {
             nextRoom = Object.values(dayData)[timeIndex + 1][0];
             return res.redirect(`/${nextRoom[0]}/${nextRoom[1]}?room=${nextRoom}`);

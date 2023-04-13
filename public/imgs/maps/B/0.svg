@@ -52,7 +52,7 @@
        id="base"
        inkscape:current-layer="g4126"
        inkscape:cx="622.5"
-       inkscape:cy="462.5"
+       inkscape:cy="463.5"
        inkscape:deskcolor="#d1d1d1"
        inkscape:document-units="mm"
        inkscape:lockguides="false"
@@ -7384,7 +7384,7 @@
        style="font-size:17.3333px;font-family:jost;-inkscape-font-specification:jost;white-space:pre;shape-inside:url(#rect5286);display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.00157;stroke-opacity:0"><tspan
          x="464"
          y="211.56369"
-         id="tspan6874">0</tspan></text><text
+         id="tspan10791">0</tspan></text><text
        xml:space="preserve"
        style="font-size:32px;font-family:jost;-inkscape-font-specification:jost;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:4.3896;stroke-opacity:0"
        x="732.40833"
@@ -7813,7 +7813,10 @@
          id="tspan5608"
          x="1310.8619"
          y="2222.4626"
-         style="font-size:29.2182px;stroke-width:4.3896">B059</tspan></text><text
+         style="font-size:29.2182px;stroke-width:4.3896">B059</tspan></text><path
+       style="display:inline;fill:#cecece;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00157;stroke-opacity:0"
+       d="m 187,386.90003 h 167 v -261 H 187 Z"
+       id="path1809" /><text
        xml:space="preserve"
        style="font-size:29.2182px;font-family:jost;-inkscape-font-specification:jost;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:4.3896;stroke-opacity:0"
        x="1397.2891"
@@ -8365,10 +8368,7 @@
          id="path22709-6-6" /><path
          d="M 281.16885,23.261076 H 264.97369"
          style="display:inline;fill:none;stroke:#888888;stroke-width:0.279763;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-         id="path22711-0-7" /></g><path
-       style="fill:#cecece;fill-rule:evenodd;stroke:#000000;stroke-width:1.00157;stroke-opacity:0;fill-opacity:1"
-       d="m 179.99999,397.90001 h 167 v -261 h -167 z"
-       id="path1809" /></g><g
+         id="path22711-0-7" /></g></g><g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Map" /></svg>

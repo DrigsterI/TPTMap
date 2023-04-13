@@ -10,7 +10,7 @@
    style="enable-background:new 0 0 841.9 595.3;"
    xml:space="preserve"
    sodipodi:docname="0.svg"
-   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -34,19 +34,19 @@
    borderopacity="1"
    id="namedview6000"
    inkscape:current-layer="layer1"
-   inkscape:cx="492.49986"
-   inkscape:cy="303.3488"
+   inkscape:cx="145.09375"
+   inkscape:cy="341.99999"
    inkscape:deskcolor="#505050"
    inkscape:document-units="mm"
    inkscape:pagecheckerboard="1"
    inkscape:pageopacity="0"
    inkscape:showpageshadow="0"
-   inkscape:window-height="1017"
+   inkscape:window-height="1001"
    inkscape:window-maximized="1"
    inkscape:window-width="1920"
-   inkscape:window-x="1912"
-   inkscape:window-y="-8"
-   inkscape:zoom="1.4142136"
+   inkscape:window-x="-9"
+   inkscape:window-y="-9"
+   inkscape:zoom="16"
    pagecolor="#ffffff"
    showgrid="false">
 	</sodipodi:namedview>
@@ -309,7 +309,8 @@
    inkscape:original-d="m 46.538305,82.225469 12.581713,-1.169305 0.561268,9.027031 h -4.490128 v 16.323485 l -3.695002,-1.91766 -0.233135,-0.55738 -4.150651,1.10794 -4.034896,-1.42213 V 92.538021 h 4.316016 v -0.926042 z"
    inkscape:path-effect="#path-effect2643"
    class="st2"
-   d="   M131.9,233.1l35.7-3.3" />
+   d="   M131.9,233.1l35.7-3.3"
+   inkscape:label="0000A007" />
 	<rect
    id="A009"
    x="603"
@@ -2938,7 +2939,11 @@
    id="A007_00000074403392607510457820000002712657398252264615_"
    class="st3"
    points="132.2,232.9 168,229.9 169.3,247.8    169.3,255.5 156.3,255.5 156.5,296 146.1,296.1 145.3,294.6 133.4,297.9 122,293.7 122,262.3 134.1,262.3 134.1,259.8  " />
-</g>
+<path
+   style="fill:#000000;fill-opacity:0"
+   d="m 131.87541,232.99168 2.12132,29.34493 h -12.72792 l 0.70711,31.1127 11.21158,4.55068 11.8125,-3.5 1.0625,1.75 10.375,5.5 v -46.1875 h 12.75 v -7.625 l -1.25,-17.875 z"
+   id="path5195"
+   inkscape:label="A007" /></g>
 <g
    id="text3648">
 	<g

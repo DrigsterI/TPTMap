@@ -24,9 +24,9 @@ app.use(express.json());
 const port = 3000;
 
 
-var ru = { Floors:"Этажы", Building: "Корпуса", Home:"Домашняя страница", AboutUs: "О Нас" ,Languages: "Языки:"};
-var est = { Floors:"Põrand", Building: "Hoone", Home:"Koduleht", AboutUs: "Meist" ,Languages: "Keeled:"};
-var eng = { Floors:"Floors", Building: "Building", Home:"Home", AboutUs: "AboutUs" ,Languages: "Languages:"};
+var ru = { Floors:"Этажи", Building: "Корпус", Home:"Домашняя страница", AboutUs: "О Нас" ,Languages: "Языки:"};
+var est = { Floors:"Korrus", Building: "Hoone", Home:"Koduleht", AboutUs: "Meist" ,Languages: "Keeled:"};
+var eng = { Floors:"Floor", Building: "Building", Home:"Home", AboutUs: "AboutUs" ,Languages: "Languages:"};
 
 
 var localization = eng;
@@ -47,7 +47,7 @@ app.get('/eng', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.redirect('/A/0');
+  res.redirect('/A/1');
 });
 app.get('/about', (req, res) => {
   res.render('aboutus.html');
